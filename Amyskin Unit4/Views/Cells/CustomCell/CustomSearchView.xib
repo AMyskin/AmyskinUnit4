@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomSearchView" customModule="lessson_2" customModuleProvider="target">
+            <connections>
+                <outlet property="cancelButton" destination="Apg-6l-dET" id="9R8-CF-d0D"/>
+                <outlet property="centerXImageConstraint" destination="frt-4F-XJ9" id="GcW-gE-inZ"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="zdt-F2-aow"/>
+                <outlet property="leftCancelButtonConstaint" destination="Cs5-OJ-AmW" id="M3c-IY-leW"/>
+                <outlet property="leftTextConstraint" destination="kwW-1d-PfY" id="4JI-qW-NZf"/>
+                <outlet property="myView" destination="Zbi-52-Xhu" id="LRs-QS-nCt"/>
+                <outlet property="searchFieldText" destination="ieF-NR-6Y7" id="REE-RY-HR7"/>
+                <outlet property="searchImage" destination="X2K-3r-REM" id="2BQ-UZ-Lwo"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zbi-52-Xhu">
+                    <rect key="frame" x="10" y="0.0" width="394" height="50"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ieF-NR-6Y7">
+                            <rect key="frame" x="0.0" y="16" width="394" height="18.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="X2K-3r-REM">
+                            <rect key="frame" x="187" y="16" width="20" height="18"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apg-6l-dET">
+                            <rect key="frame" x="409" y="10" width="70" height="30"/>
+                            <color key="backgroundColor" red="1" green="0.33861737590000002" blue="0.15786101860000001" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="EWs-PB-PWr"/>
+                                <constraint firstAttribute="height" constant="30" id="lYy-Wy-RMl"/>
+                            </constraints>
+                            <state key="normal" title="Отмена">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
+                                    <integer key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="cancelButtonPushed:" destination="-1" eventType="touchUpInside" id="5xi-9P-IO7"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="ieF-NR-6Y7" secondAttribute="trailing" id="9r3-aq-Ol6"/>
+                        <constraint firstAttribute="height" constant="50" id="Bau-Wo-k2O"/>
+                        <constraint firstItem="Apg-6l-dET" firstAttribute="leading" secondItem="ieF-NR-6Y7" secondAttribute="trailing" constant="15" id="Cs5-OJ-AmW"/>
+                        <constraint firstItem="Apg-6l-dET" firstAttribute="centerY" secondItem="Zbi-52-Xhu" secondAttribute="centerY" id="Fgy-QA-UMt"/>
+                        <constraint firstItem="X2K-3r-REM" firstAttribute="centerY" secondItem="Zbi-52-Xhu" secondAttribute="centerY" id="Kh7-Q1-fUf"/>
+                        <constraint firstItem="X2K-3r-REM" firstAttribute="centerX" secondItem="Zbi-52-Xhu" secondAttribute="centerX" id="frt-4F-XJ9"/>
+                        <constraint firstItem="ieF-NR-6Y7" firstAttribute="leading" secondItem="Zbi-52-Xhu" secondAttribute="leading" id="kwW-1d-PfY"/>
+                        <constraint firstItem="ieF-NR-6Y7" firstAttribute="centerY" secondItem="Zbi-52-Xhu" secondAttribute="centerY" id="ovh-h8-W3J"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="Zbi-52-Xhu" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ddW-q0-ijm"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Zbi-52-Xhu" secondAttribute="trailing" constant="10" id="m5B-QL-q6L"/>
+                <constraint firstItem="Zbi-52-Xhu" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="qyD-Dq-Dpc"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="131.8840579710145" y="100.44642857142857"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+    </resources>
+</document>
