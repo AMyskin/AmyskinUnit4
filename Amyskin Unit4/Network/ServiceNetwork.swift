@@ -111,7 +111,7 @@ class ServiceNetwork {
     }
     
     let baseUrl = "https://api.vk.com/method/"
-    let apiKey = "a55c81199abd75a6230ee3d44cd460b2cde0231700d0d436dc3881a3864dbb4df38f8c4d12d0287eaaba8"
+    let apiKey = Session.instance.token
     
     func getFriendsWithPromise() -> Promise<VKResponse<FriendData>> {
         

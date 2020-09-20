@@ -16,6 +16,7 @@ class MyGroupTableViewController: UITableViewController , GroupCellDelegate{
     
     
     lazy var service = ServiceNetwork()
+    lazy var photoService = PhotoService(container: self.tableView)
     
    // lazy var database = Database.database()
    // lazy var ref: DatabaseReference = self.database.reference(withPath: "users")
@@ -99,7 +100,13 @@ class MyGroupTableViewController: UITableViewController , GroupCellDelegate{
 
         cell.name.text = myGroupList[indexPath.row].name
        // cell.avatarView.avatarImage = myGroupList[indexPath.row].image
-        cell.avatarView.imageURL = myGroupList[indexPath.row].imageUrl
+        //cell.avatarView.imageURL = myGroupList[indexPath.row].imageUrl
+        
+        cell.avatarView.avatarImage = photoService.photo(
+                 at: indexPath,
+                 url: myGroupList[indexPath.row].imageUrl
+             )
+        
         cell.delegate = self
         
         return cell

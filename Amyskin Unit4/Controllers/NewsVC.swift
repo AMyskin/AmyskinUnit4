@@ -17,6 +17,7 @@ class NewsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, News
     }()
     
     lazy var service = ServiceNetwork()
+    lazy var photoService = PhotoService(container: self.tableView)
     
     var selectedCell = UICollectionViewCell()
     
@@ -121,7 +122,11 @@ class NewsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, News
         
         cell.configure(model: news, dateFormatter: dateFormatter)
         
-        
+        cell.avatarView.avatarImage = photoService.photo(
+                            at: indexPath,
+                            url: news.avatarUrl
+                        )
+   
         
         
         cell.delegate = self
@@ -274,6 +279,10 @@ class NewsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, News
             
         }
         cell.photoURL = newsTest[collectionView.tag].imageUrl?[indexPath.row]
+        cell.photoImageView.image = photoService.photo(
+            at: indexPath,
+            url: cell.photoURL
+        )
         
         
         
@@ -317,8 +326,9 @@ class NewsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, News
         
         
         
-        // collectionPhotoVC.userImage = newsTest[collectionView.tag].image
+       
         collectionPhotoVC.userImageUrl = newsTest[collectionView.tag].imageUrl ?? []
+        collectionPhotoVC.userImage = reloadPhotos(collectionPhotoVC.userImageUrl)
         
         selectedCell = selectedcell2
         
@@ -336,6 +346,19 @@ class NewsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, News
         transitionController.startView = selectedcell2.photoImageView
         
         self.present(collectionPhotoVC, animated: true, completion: nil)
+    }
+    
+    private func reloadPhotos(_ url: [String]) -> [UIImage]{
+        var photos : [UIImage] = []
+        for (index, photoUrl) in url.enumerated(){
+            let imageView: UIImageView = UIImageView()
+            let indexPath: IndexPath = IndexPath(row: index, section: 0)
+            imageView.image = photoService.photo(at: indexPath, url: photoUrl)
+            if let image = imageView.image {
+                photos.append(image)
+            }
+        }
+        return photos
     }
     
     

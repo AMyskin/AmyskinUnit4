@@ -24,6 +24,8 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
     @IBOutlet weak var customSearchBar: CustomSearchView!
     
     lazy var service = ServiceNetwork()
+    lazy var photoService = PhotoService(container: self.tableView)
+    
     let searchController = UISearchController(searchResultsController: nil)
     lazy var friends: Results<FriendData> = {
         return realm.objects(FriendData.self)
@@ -36,6 +38,7 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
     }
+    
     
     var notificationToken: NotificationToken?
     //  var userList = User.arrayOfFriends
@@ -362,7 +365,10 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
         
         cell.configure(friend: user)
         // cell.name.text = "\(user.firstName) \(user.lastName)"
-        //cell.avatarView.avatarImage = user.avatar
+        cell.avatarView.avatarImage = photoService.photo(
+            at: indexPath,
+            url: user.avatar
+        )
         //cell.avatarButton.setImage(user.avatar, for: .normal)
         
         let animation = AnimationFactory.makeSlideIn(duration: 1, delayFactor: 0.01)

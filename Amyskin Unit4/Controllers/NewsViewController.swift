@@ -20,6 +20,7 @@ final class NewsViewController: UITableViewController {
     let loadingLabel = UILabel()
     
     lazy var service = ServiceNetwork()
+    lazy var photoService = PhotoService(container: self.tableView)
     
     var news: [NewsOfUser] = []
     
@@ -87,10 +88,28 @@ final class NewsViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotoNewsCell
             cell.configure(item: news[indexPath.row], dateFormatter: dateFormatter)
             
+            cell.authorImageView.image = photoService.photo(
+                           at: indexPath,
+                           url: news[indexPath.row].avatarUrl
+                       )
+            cell.photoImageView.image = photoService.photo(
+                            at: indexPath,
+                            url: news[indexPath.row].imageUrl?.first
+                        )
+            
+            
             return cell
         } else {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! NewsCell
-        cell.configure(item: news[indexPath.row], dateFormatter: dateFormatter)
+            cell.configure(item: news[indexPath.row], dateFormatter: dateFormatter)
+            cell.authorImageView.image = photoService.photo(
+                at: indexPath,
+                url: news[indexPath.row].avatarUrl
+            )
+            cell.photoImageView.image = photoService.photo(
+                at: indexPath,
+                url: news[indexPath.row].imageUrl?.first
+            )
         
         return cell
         }

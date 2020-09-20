@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+//import Kingfisher
 
 
 final class PhotoCell: UICollectionViewCell {
@@ -15,15 +15,16 @@ final class PhotoCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
  
     
-    var imageURL: String? {
-        didSet{
-            if let imageURL = imageURL, let url = URL(string: imageURL) {
-                imageView.kf.setImage(with: url)
-            } else {
-                imageView.image = nil
-                imageView.kf.cancelDownloadTask()
-            }
-        }
-    }
+    var imageURL: String?
+//    {
+//        didSet{
+//            if let imageURL = imageURL, let url = URL(string: imageURL) {
+//                imageView.kf.setImage(with: url)
+//            } else {
+//                imageView.image = nil
+//                imageView.kf.cancelDownloadTask()
+//            }
+//        }
+//    }
     
 }

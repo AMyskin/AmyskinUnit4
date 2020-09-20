@@ -7,10 +7,12 @@
 //
 
 import UIKit
-import Kingfisher
+//import Kingfisher
 
 
 final class SliderViewController: UIViewController {
+
+    
 
     
     var photos: [UIImage] = []
@@ -26,18 +28,25 @@ final class SliderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        photosUrl.forEach{ (url) in
-            let imageView: UIImageView = UIImageView()
-            if  let url = URL(string: url.photosUrl) {
-                imageView.kf.setImage(with: url)
-            } else {
-                imageView.image = nil
-                imageView.kf.cancelDownloadTask()
-            }
-            if let image = imageView.image {
-                photos.append(image)
-            }
-        }
+        
+
+ 
+
+        
+        
+        
+//        photosUrl.forEach{ (url) in
+//            let imageView: UIImageView = UIImageView()
+//            if  let url = URL(string: url.photosUrl) {
+//                imageView.kf.setImage(with: url)
+//            } else {
+//                imageView.image = nil
+//                imageView.kf.cancelDownloadTask()
+//            }
+//            if let image = imageView.image {
+//                photos.append(image)
+//            }
+//        }
         photos.forEach { addSlide(image: $0) }
     }
     

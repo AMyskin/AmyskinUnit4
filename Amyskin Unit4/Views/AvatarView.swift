@@ -7,19 +7,15 @@
 //
 
 import UIKit
-import Kingfisher
+//import Kingfisher
 
-//protocol AvatarViewDelegate: class {
-//
-//    func buttonTapped( button : UIButton)
-//
-//}
+
 
  class AvatarView: UIView {
     
     //weak var delegate: AvatarViewDelegate?
     
-    var avatarImage: UIImage? = nil {
+    var avatarImage: UIImage? {
         didSet {
             imageView.image = avatarImage
             //imageButton.setImage(avatarImage, for: .normal )
@@ -27,27 +23,21 @@ import Kingfisher
         }
     }
     
-    var imageURL: String? {
-        didSet{
-            if let imageURL = imageURL, let url = URL(string: imageURL) {
-                imageView.kf.setImage(with: url)
-            } else {
-                imageView.image = nil
-                imageView.kf.cancelDownloadTask()
-            }
-        }
-    }
+    var imageURL: String?
+ 
+// {
+//        didSet{
+//            if let imageURL = imageURL, let url = URL(string: imageURL) {
+//                imageView.kf.setImage(with: url)
+//            } else {
+//                imageView.image = nil
+//                imageView.kf.cancelDownloadTask()
+//            }
+//        }
+//    }
     
     lazy var imageView = UIImageView()
-//    var imageButton = UIButton(){
-//    didSet{
-//        imageButton.layer.cornerRadius = 0.5 * imageButton.bounds.size.height
-//        imageButton.layer.shadowOffset = CGSize(width: 5, height: 5)
-//        imageButton.layer.borderColor = UIColor.white.cgColor
-//        imageButton.layer.borderWidth = 2
-//        imageButton.clipsToBounds = true
-//    }
-//    }
+
     
     var imageRadius: CGFloat = 20
      var widthShadow: CGFloat = 5
@@ -75,20 +65,7 @@ import Kingfisher
         self.layer.shadowRadius = widthShadow;
         self.layer.shadowOffset = CGSize (width: 5, height: 5)
         
-//        imageButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-//        addSubview(imageButton)
-//
-//        imageButton.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//
-//            imageButton.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-//            imageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-//            imageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 0),
-//            imageButton.rightAnchor.constraint(equalTo: rightAnchor, constant: 0)
-//        ])
-//
-//        imageButton.layer.borderColor = UIColor.white.cgColor
-//        imageButton.layer.borderWidth = 2
+
         
         
         
@@ -140,14 +117,7 @@ import Kingfisher
                            
                            imageView.layer.add(pulse, forKey: nil)
         
-        
-//        imageView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-//
-//        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [], animations: {
-//            self.imageView.transform = .identity
-//        }, completion: { _ in
-//
-//        })
+
     }
     
     

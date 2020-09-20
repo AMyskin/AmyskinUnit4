@@ -2,21 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "Kingfisher",
-        "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
-        "state": {
-          "branch": null,
-          "revision": "1339ebea9498ef6c3fc75cc195d7163d7c7167f9",
-          "version": "5.14.1"
-        }
-      },
-      {
         "package": "Realm",
         "repositoryURL": "https://github.com/realm/realm-cocoa",
         "state": {
           "branch": null,
-          "revision": "381de6c8eea4cee147d2b79d28cfc64a408d18b4",
-          "version": "5.3.3"
+          "revision": "59aa69458542e3e84d29c02588407b2d241d8fa0",
+          "version": "5.4.1"
         }
       },
       {
@@ -24,17 +15,8 @@
         "repositoryURL": "https://github.com/realm/realm-core",
         "state": {
           "branch": null,
-          "revision": "60c12a79b86a2a5278364fbf8c76d6062289e79e",
-          "version": "6.0.14"
-        }
-      },
-      {
-        "package": "SwiftyJSON",
-        "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON.git",
-        "state": {
-          "branch": null,
-          "revision": "2b6054efa051565954e1d2b9da831680026cd768",
-          "version": "5.0.0"
+          "revision": "e051fc73c56830bf3ab0b8a82f7a613968cec6c6",
+          "version": "6.0.26"
         }
       }
     ]

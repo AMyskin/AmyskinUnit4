@@ -41,8 +41,8 @@ class FreindsCell: UITableViewCell {
     func configure(friend: FriendData) {
         
         self.name.text = "\(friend.firstName) \(friend.lastName)"
-        self.avatarView.imageURL = friend.avatar
-        //self.backgroundColor = UIColor.black
+        //self.avatarView.imageURL = friend.avatar
+        
     }
 
     override func prepareForReuse() {

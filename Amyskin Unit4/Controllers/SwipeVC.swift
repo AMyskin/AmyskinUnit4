@@ -7,31 +7,33 @@
 //
 
 import UIKit
-import Kingfisher
+//import Kingfisher
 
 class SwipeVC: UIViewController {
     
     
-    var imageURL: String? {
-        didSet{
-            if let imageURL = imageURL, let url = URL(string: imageURL) {
-                image.kf.setImage(with: url)
-            } else {
-                image.image = nil
-                image.kf.cancelDownloadTask()
-            }
-        }
-    }
-    var nextImageURL: String? {
-        didSet{
-            if let nextImageURL = nextImageURL, let url = URL(string: nextImageURL) {
-                nextImageView.kf.setImage(with: url)
-            } else {
-                nextImageView.image = nil
-                nextImageView.kf.cancelDownloadTask()
-            }
-        }
-    }
+    var imageURL: String?
+//    {
+//        didSet{
+//            if let imageURL = imageURL, let url = URL(string: imageURL) {
+//                image.kf.setImage(with: url)
+//            } else {
+//                image.image = nil
+//                image.kf.cancelDownloadTask()
+//            }
+//        }
+//    }
+    var nextImageURL: String?
+//    {
+//        didSet{
+//            if let nextImageURL = nextImageURL, let url = URL(string: nextImageURL) {
+//                nextImageView.kf.setImage(with: url)
+//            } else {
+//                nextImageView.image = nil
+//                nextImageView.kf.cancelDownloadTask()
+//            }
+//        }
+//    }
     
     var swipeInteractionController: SwipeInteractionController?
     
@@ -39,6 +41,7 @@ class SwipeVC: UIViewController {
         return transitioningDelegate as? TransitionController
     }
     
+
 
     @IBOutlet weak var viewBeforeImage: UIView!
     @IBOutlet weak var image: UIImageView!
@@ -49,7 +52,7 @@ class SwipeVC: UIViewController {
     var indexOfImage : Int = 0
     @IBOutlet weak var indexOfPhotoLabel: UILabel!
     
-
+  
     
     
     override func viewDidLoad() {
@@ -67,8 +70,8 @@ class SwipeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         //print(#function)
         //print("indexOfImage=\(indexOfImage)")
-         //image.image = userImage[indexOfImage]
-        imageURL = userImageUrl[indexOfImage]
+         image.image = userImage[indexOfImage]
+        //imageURL = userImageUrl[indexOfImage]
          indexOfPhotoLabel.text = "\(indexOfImage+1)"
         transitionController?.endView = image
         

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+//import Kingfisher
 
 final class PhotoNewsCell: UITableViewCell {
     
@@ -23,26 +23,29 @@ final class PhotoNewsCell: UITableViewCell {
      @IBOutlet weak var repostsButton: UIButton!
     
     
-    var imageURL: String? {
-        didSet{
-            if let imageURL = imageURL, let url = URL(string: imageURL) {
-                photoImageView.kf.setImage(with: url)
-            } else {
-                photoImageView.image = nil
-                photoImageView.kf.cancelDownloadTask()
-            }
-        }
-    }
-    var avatarURL: String? {
-          didSet{
-              if let avatarURL = avatarURL, let url = URL(string: avatarURL) {
-                  authorImageView.kf.setImage(with: url)
-              } else {
-                  authorImageView.image = nil
-                  authorImageView.kf.cancelDownloadTask()
-              }
-          }
-      }
+    var imageURL: String?
+    
+//    {
+//        didSet{
+//            if let imageURL = imageURL, let url = URL(string: imageURL) {
+//                photoImageView.kf.setImage(with: url)
+//            } else {
+//                photoImageView.image = nil
+//                photoImageView.kf.cancelDownloadTask()
+//            }
+//        }
+//    }
+    var avatarURL: String?
+//    {
+//          didSet{
+//              if let avatarURL = avatarURL, let url = URL(string: avatarURL) {
+//                  authorImageView.kf.setImage(with: url)
+//              } else {
+//                  authorImageView.image = nil
+//                  authorImageView.kf.cancelDownloadTask()
+//              }
+//          }
+//      }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
            sender.isSelected.toggle()

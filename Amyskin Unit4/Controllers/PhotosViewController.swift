@@ -12,6 +12,7 @@ import RealmSwift
 final class PhotosViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     lazy var service = ServiceNetwork()
+    lazy var photoService = PhotoService(container: self.collectionView)
     
     lazy var realm: Realm = {
         let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
@@ -22,6 +23,7 @@ final class PhotosViewController: UICollectionViewController, UICollectionViewDe
     var notificationToken: NotificationToken?
 
     lazy var fotos = List<Foto>()
+    var photos: [UIImage] = []
     var userId: Int = 0
     
     // MARK: - Life cycle
@@ -35,6 +37,20 @@ final class PhotosViewController: UICollectionViewController, UICollectionViewDe
         
      
     }
+    
+    private func reloadPhotos(){
+        
+        for (index, photo) in fotos.enumerated(){
+            let imageView: UIImageView = UIImageView()
+            let indexPath: IndexPath = IndexPath(row: index, section: 0)
+            imageView.image = photoService.photo(at: indexPath, url: photo.photosUrl)
+            if let image = imageView.image {
+                photos.append(image)
+            }
+        }
+        
+    }
+    
     
     private func subscribeToNotificationsWithRealm() {
         guard let object = realm.object(ofType: FriendData.self, forPrimaryKey: userId) else {
@@ -51,7 +67,7 @@ final class PhotosViewController: UICollectionViewController, UICollectionViewDe
                 self?.collectionView.reloadData()
                 
             case let .update(_, deletions, insertions, modifications):
-                print(deletions, insertions, modifications)
+                //print(deletions, insertions, modifications)
                 self?.collectionView.performBatchUpdates({
                     self?.collectionView.deleteItems(at: deletions.mapToIndexPaths())
                     self?.collectionView.insertItems(at: insertions.mapToIndexPaths())
@@ -61,6 +77,7 @@ final class PhotosViewController: UICollectionViewController, UICollectionViewDe
             case let .error(error):
                 print(error)
             }
+            self?.reloadPhotos()
         }
     }
     
@@ -79,6 +96,7 @@ final class PhotosViewController: UICollectionViewController, UICollectionViewDe
         {
             controller.title = title
             controller.photosUrl = Array(fotos)
+            controller.photos = photos
             controller.currentIndex = indexPath.row
         }
     }
@@ -92,6 +110,7 @@ final class PhotosViewController: UICollectionViewController, UICollectionViewDe
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoCell
         cell.imageURL = fotos[indexPath.row].photosUrl
+        cell.imageView.image = photoService.photo(at: indexPath, url: cell.imageURL)
         
         return cell
     }

@@ -7,10 +7,10 @@ target 'Amyskin Unit4' do
 
   # Pods for Amyskin Unit4
 
-  pod "PromiseKit/CorePromise", "~> 6.8"
-  pod 'Alamofire', '~> 5.2'
-  pod 'Kingfisher', '~> 5.0'
-  # pod 'RealmSwift'
-  pod 'SwiftyJSON', '~> 4.0'
+  #pod "PromiseKit/CorePromise", "~> 6.8"
+  #pod 'Alamofire', '~> 5.2'
+  #pod 'Kingfisher', '~> 5.0'
+  #pod 'RealmSwift'
+  #pod 'SwiftyJSON', '~> 4.0'
 
 end

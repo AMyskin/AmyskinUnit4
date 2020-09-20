@@ -16,6 +16,7 @@ class AllGroupTableViewController: UITableViewController, GroupCellDelegate, UIS
     
 
      lazy var service = ServiceNetwork()
+    lazy var photoService = PhotoService(container: self.tableView)
     
     
     var allGroupList: [GroupData] = []
@@ -77,7 +78,13 @@ class AllGroupTableViewController: UITableViewController, GroupCellDelegate, UIS
 
         cell.name.text = allGroupList[indexPath.row].name
        // cell.avatarView.avatarImage = allGroupList[indexPath.row].image
-         cell.avatarView.imageURL = allGroupList[indexPath.row].imageUrl
+      //  cell.avatarView.imageURL = allGroupList[indexPath.row].imageUrl
+        
+        cell.avatarView.avatarImage = photoService.photo(
+                      at: indexPath,
+                      url: allGroupList[indexPath.row].imageUrl
+                  )
+        
         cell.delegate = self
 
         return cell
