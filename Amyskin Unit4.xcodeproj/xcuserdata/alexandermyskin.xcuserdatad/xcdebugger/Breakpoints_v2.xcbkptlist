@@ -1657,8 +1657,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "636"
-            endingLineNumber = "636"
+            startingLineNumber = "748"
+            endingLineNumber = "748"
             landmarkName = "convertNew(response:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1721,25 +1721,9 @@
             filePath = "Amyskin Unit4/Controllers/NewsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "getUserFeed()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4E8C6530-FC56-468A-A0C0-C00DCBEBA73D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
-            landmarkName = "getUserNewsFeed(newQuery:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1753,8 +1737,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "291"
-            endingLineNumber = "291"
+            startingLineNumber = "372"
+            endingLineNumber = "372"
             landmarkName = "parseNewsJSON(withDate:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1769,8 +1753,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
             landmarkName = "parseNewsJSON(withDate:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1785,8 +1769,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "425"
-            endingLineNumber = "425"
+            startingLineNumber = "502"
+            endingLineNumber = "502"
             landmarkName = "getGroupsForJSON(findIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1801,8 +1785,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "446"
-            endingLineNumber = "446"
+            startingLineNumber = "523"
+            endingLineNumber = "523"
             landmarkName = "getProfilesForJSON(findIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1817,8 +1801,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
+            startingLineNumber = "415"
+            endingLineNumber = "415"
             landmarkName = "getItemsForJSON(findIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1833,8 +1817,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "336"
-            endingLineNumber = "336"
+            startingLineNumber = "417"
+            endingLineNumber = "417"
             landmarkName = "getItemsForJSON(findIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1849,8 +1833,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "369"
-            endingLineNumber = "369"
+            startingLineNumber = "450"
+            endingLineNumber = "450"
             landmarkName = "getItemsForJSON(findIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1865,8 +1849,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "355"
-            endingLineNumber = "355"
+            startingLineNumber = "436"
+            endingLineNumber = "436"
             landmarkName = "getItemsForJSON(findIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1881,8 +1865,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "361"
-            endingLineNumber = "361"
+            startingLineNumber = "442"
+            endingLineNumber = "442"
             landmarkName = "getItemsForJSON(findIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1897,8 +1881,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
+            startingLineNumber = "454"
+            endingLineNumber = "454"
             landmarkName = "getItemsForJSON(findIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1913,8 +1897,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "383"
-            endingLineNumber = "383"
+            startingLineNumber = "460"
+            endingLineNumber = "460"
             landmarkName = "getItemsForJSON(findIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1929,8 +1913,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
+            startingLineNumber = "398"
+            endingLineNumber = "398"
             landmarkName = "parseNewsJSON(withDate:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1945,8 +1929,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
+            startingLineNumber = "396"
+            endingLineNumber = "396"
             landmarkName = "parseNewsJSON(withDate:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1961,8 +1945,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "391"
+            endingLineNumber = "391"
             landmarkName = "parseNewsJSON(withDate:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1977,8 +1961,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "385"
-            endingLineNumber = "385"
+            startingLineNumber = "462"
+            endingLineNumber = "462"
             landmarkName = "getItemsForJSON(findIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1993,8 +1977,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "929"
-            endingLineNumber = "929"
+            startingLineNumber = "1091"
+            endingLineNumber = "1091"
             landmarkName = "saveFriensToRealm(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2009,8 +1993,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "945"
-            endingLineNumber = "945"
+            startingLineNumber = "1107"
+            endingLineNumber = "1107"
             landmarkName = "saveGroupsToRealm(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2025,8 +2009,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "866"
-            endingLineNumber = "866"
+            startingLineNumber = "1028"
+            endingLineNumber = "1028"
             landmarkName = "getMyGroups()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2041,8 +2025,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "864"
-            endingLineNumber = "864"
+            startingLineNumber = "1026"
+            endingLineNumber = "1026"
             landmarkName = "getMyGroups()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2057,8 +2041,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "999"
-            endingLineNumber = "999"
+            startingLineNumber = "1183"
+            endingLineNumber = "1183"
             landmarkName = "main()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2073,8 +2057,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1003"
-            endingLineNumber = "1003"
+            startingLineNumber = "1187"
+            endingLineNumber = "1187"
             landmarkName = "main()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2083,14 +2067,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "A6D5AD27-D1A6-4186-84EF-1CED2E22594D"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "946"
-            endingLineNumber = "946"
+            startingLineNumber = "1108"
+            endingLineNumber = "1108"
             landmarkName = "saveGroupsToRealm(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2105,8 +2089,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1058"
-            endingLineNumber = "1058"
+            startingLineNumber = "1242"
+            endingLineNumber = "1242"
             landmarkName = "main()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2121,8 +2105,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1061"
-            endingLineNumber = "1061"
+            startingLineNumber = "1245"
+            endingLineNumber = "1245"
             landmarkName = "main()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2137,8 +2121,8 @@
             filePath = "Amyskin Unit4/Network/ServiceNetwork.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "875"
-            endingLineNumber = "875"
+            startingLineNumber = "1037"
+            endingLineNumber = "1037"
             landmarkName = "getMyGroups()"
             landmarkType = "7">
          </BreakpointContent>

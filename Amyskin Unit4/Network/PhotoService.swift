@@ -60,7 +60,7 @@ final class PhotoService {
     }
     
     private func getImageFromCache(url: String) -> UIImage? {
-        print(#function)
+        //print(#function)
         guard
             let filePath = getFilePath(url: url),
             let info = try? FileManager.default.attributesOfItem(atPath: filePath),
@@ -83,7 +83,7 @@ final class PhotoService {
     private var images = [String: UIImage]()
     
     private func loadImage(at indexPath: IndexPath, url: String) {
-        print(#function)
+        //print(#function)
         AF.request(url).responseData { [weak self] (response) in
             guard
                 let data = response.data,

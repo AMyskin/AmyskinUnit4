@@ -8,21 +8,17 @@
 
 import UIKit
 
-final class NewsViewController: UITableViewController {
+final class NewsViewController: UITableViewController, UITableViewDataSourcePrefetching {
     
 
     let loadingView = UIView()
-    
-
     let spinner = UIActivityIndicatorView()
-    
-
     let loadingLabel = UILabel()
     
     lazy var service = ServiceNetwork()
     lazy var photoService = PhotoService(container: self.tableView)
-    
-    var news: [NewsOfUser] = []
+    var news: [NewsItem] = []
+    var isLoading = false
     
     lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -39,13 +35,20 @@ final class NewsViewController: UITableViewController {
         
         
         self.setLoadingScreen()
+        tableView.prefetchDataSource = self
         
         getUserFeed()
- 
         
+        setupRefreshControl()
+ 
+
+    }
+    
+    
+    private func setupRefreshControl(){
         refreshControl = UIRefreshControl()
-           refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
-           refreshControl!.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+           refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+           refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
     }
     
     func getUserFeed(){
@@ -56,24 +59,29 @@ final class NewsViewController: UITableViewController {
             
                 self.tableView.reloadData()
                 self.removeLoadingScreen()
-                self.refreshControl?.endRefreshing()
+                
             
         }
     }
     
     @objc func handleRefreshControl() {
          // Update your content…
-        getUserFeed()
-//        DispatchQueue.main.async {
-//            self.refreshControl?.endRefreshing()
-//         }
+        let mostFreshNewsDate = (self.news.first?.date ?? Date()).timeIntervalSince1970
+        service.getUserNewsFeed(from: mostFreshNewsDate + 1, newQuery: true){ [weak self](freshNews) in
+            guard let self = self else {return}
+            self.refreshControl?.endRefreshing()
+            guard freshNews.count > 0 else {return}
+            
+            self.news = freshNews + self.news
+            
+            let indexPaths = (0..<freshNews.count)
+                .map {IndexPath(item: $0, section: 0)}
+            
+            self.tableView.insertRows(at: indexPaths, with: .automatic)
+            
+        }
       }
-    
- 
-    
-    // MARK: - Navigation
-    
-    
+
     
     // MARK: - UITableViewDataSource & UITableViewDelegate
     
@@ -96,50 +104,87 @@ final class NewsViewController: UITableViewController {
                             at: indexPath,
                             url: news[indexPath.row].imageUrl?.first
                         )
-            
-            
+
             return cell
-        } else {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! NewsCell
+        } else if (postNews.videoUrl != nil) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! VideoNewsCell
             cell.configure(item: news[indexPath.row], dateFormatter: dateFormatter)
             cell.authorImageView.image = photoService.photo(
                 at: indexPath,
                 url: news[indexPath.row].avatarUrl
             )
-            cell.photoImageView.image = photoService.photo(
-                at: indexPath,
-                url: news[indexPath.row].imageUrl?.first
-            )
+         
         
         return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! NewsCell
+                     cell.configure(item: news[indexPath.row], dateFormatter: dateFormatter)
+                     cell.authorImageView.image = photoService.photo(
+                         at: indexPath,
+                         url: news[indexPath.row].avatarUrl
+                     )
+                     cell.photoImageView.image = photoService.photo(
+                         at: indexPath,
+                         url: news[indexPath.row].imageUrl?.first
+                     )
+                 
+                 return cell
         }
     }
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastRow = indexPath.row
-        if lastRow == news.count - 1 {
-            fetchData(lastRow)
-        }
-    }
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        let lastRow = indexPath.row
+//        if lastRow == news.count - 1 {
+//            fetchData(lastRow)
+//        }
+//    }
     
-    private func fetchData(_ lastRow: Int){
+    
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]){
+        
+        
+        guard let maxRow = indexPaths.map({ $0.row }).max(),
+                maxRow > news.count - 4,
+                isLoading == false
+            else { return }
+        isLoading = true
+        self.service.getUserNewsFeed{[weak self](freshNews) in
+            guard let self = self else {return}
+            
+            let newsCount = self.news.count
+            
+            self.news.append(contentsOf: freshNews)
+            
+            let indexPaths = (newsCount..<(newsCount + freshNews.count))
+                .map {IndexPath(item: $0, section: 0)}
+            
+            self.tableView.insertRows(at: indexPaths, with: .automatic)
+            self.isLoading = false
+            
+            print("Количество новостей = \(self.news.count)")
+            
+        }
         
 
-            self.service.getUserNewsFeed({(newsIn) in
-                
-//                if self.news.count > 30 {
-//                    self.news = self.news.suffix(20)
-//                }
-            self.news.append(contentsOf: newsIn)
-            
-                print(self.news.count)
-                
-                
-                self.tableView.reloadData()
-               
-            })
-    
     }
+    
+    
+//    private func fetchData(_ lastRow: Int){
+//
+//
+//            self.service.getUserNewsFeed({(newsIn) in
+//
+////                if self.news.count > 30 {
+////                    self.news = self.news.suffix(20)
+////                }
+//            self.news.append(contentsOf: newsIn)
+//
+//                print(self.news.count)
+//                self.tableView.reloadData()
+//
+//            })
+//
+//    }
     
     // MARK: - Activiti Indicator
     

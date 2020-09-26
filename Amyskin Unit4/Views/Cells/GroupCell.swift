@@ -8,17 +8,13 @@
 
 import UIKit
 
-protocol GroupCellDelegate: class {
 
-    func buttonTapped(cell: GroupCell, button : UIButton)
-    
-}
 
 class GroupCell: UITableViewCell {
  
     
     
-    weak var delegate: GroupCellDelegate?
+
     
     
     @IBOutlet weak var name: UILabel!
@@ -27,10 +23,7 @@ class GroupCell: UITableViewCell {
     
     @IBOutlet weak var avatarView: AvatarView!
     
-    func buttonTapped(button: UIButton) {
-       
-          delegate?.buttonTapped(cell: self, button: button)
-      }
+
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

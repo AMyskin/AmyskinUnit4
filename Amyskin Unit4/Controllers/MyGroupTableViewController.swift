@@ -10,16 +10,11 @@ import UIKit
 import RealmSwift
 //import FirebaseDatabase
 
-class MyGroupTableViewController: UITableViewController , GroupCellDelegate{
-    
-
-    
-    
+class MyGroupTableViewController: UITableViewController {
+ 
     lazy var service = ServiceNetwork()
     lazy var photoService = PhotoService(container: self.tableView)
     
-   // lazy var database = Database.database()
-   // lazy var ref: DatabaseReference = self.database.reference(withPath: "users")
     
     lazy var realm: Realm = {
         let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
@@ -39,13 +34,8 @@ class MyGroupTableViewController: UITableViewController , GroupCellDelegate{
         
         subscribeToNotificationsWithRealm()
         
-        
         loadFromNetwork()
-        
- 
-        
-        
-        
+
         //  service.getMyGroupsAlamofire()
         
     }
@@ -80,14 +70,8 @@ class MyGroupTableViewController: UITableViewController , GroupCellDelegate{
         service.getMyGroups()
     }
 
-    
-  
-    
- 
 
     // MARK: - Table view data source
-
-
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -106,15 +90,13 @@ class MyGroupTableViewController: UITableViewController , GroupCellDelegate{
                  at: indexPath,
                  url: myGroupList[indexPath.row].imageUrl
              )
-        
-        cell.delegate = self
-        
+    
         return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
          if editingStyle == .delete {
-            deleteMyGroup(myGroupList[indexPath.row])
+            service.deleteMyGroup(myGroupList[indexPath.row])
          }
      }
     
@@ -128,50 +110,12 @@ class MyGroupTableViewController: UITableViewController , GroupCellDelegate{
           
          guard !myGroupList.contains(group) else { return }
          
-        addToMyGroup(group)
+        service.addToMyGroup(group)
        // addGroupToUserInFirebase(group)
           
       }
-    
-    private func addToMyGroup(_ group: GroupData) {
 
-        
-        do {
-            try realm.write {
-                realm.add(group, update: .modified)
-            }
-        } catch {
-            print(error)
-        }
-    }
-    
-    private func deleteMyGroup(_ group: GroupData) {
-        do {
-            try realm.write {
-                realm.delete(group)
-            }
-        } catch {
-            print(error)
-        }
-    }
-    
-    
-    
-    func buttonTapped(cell: GroupCell, button: UIButton) {
-        //guard let indexPath = self.tableView.indexPath(for: cell) else {return}
-         
-             
-                       let pulse = CASpringAnimation(keyPath: "transform.scale")
-                       pulse.duration = 0.6
-                       pulse.fromValue = 0.8
-                       pulse.toValue = 1
-                       pulse.initialVelocity = 0.5
-                       pulse.damping = 1
-                       
-                       button.layer.add(pulse, forKey: nil)
-              
-           
-    }
+
     
      // MARK: - Firebase
     

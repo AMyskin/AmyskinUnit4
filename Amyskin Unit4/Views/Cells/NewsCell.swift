@@ -86,15 +86,15 @@ final class NewsCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         authorNameLabel.text = nil
-          publishedDateLabel.text = nil
+        publishedDateLabel.text = nil
         newsText.text = nil
-          //newsTextLabel.text = nil
-          photoImageView.image = nil
-          authorImageView.image = nil
-          imageURL = nil
-          avatarURL = nil
-          //countOfViewLabel.text = nil
-         // countOfLikeLabel.text = nil
+        //newsTextLabel.text = nil
+        photoImageView.image = nil
+        authorImageView.image = nil
+        imageURL = nil
+        avatarURL = nil
+        //countOfViewLabel.text = nil
+        // countOfLikeLabel.text = nil
     }
     
 }

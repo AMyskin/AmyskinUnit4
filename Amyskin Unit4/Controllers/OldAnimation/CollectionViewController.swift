@@ -16,20 +16,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
     
     var userImage : [UIImage] = []
     
-    
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //print(userImage.count)
-        
-        
-    }
-    
-    
-    
-    
-    
+
     // MARK: UICollectionViewDataSource
     static func storyboardInstance() -> CollectionViewController? {
              let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -49,7 +36,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
         cell.image.image = userImage[indexPath.row]
         
         
-      print ("-------asdfasdfasdf------\(collectionView.bounds.minY) ------------\(collectionView.bounds)")
+      //print ("-------asdfasdfasdf------\(collectionView.bounds.minY) ------------\(collectionView.bounds)")
         
         return cell
     }
@@ -86,14 +73,6 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
         cell.layer.add(animation2, forKey: nil)
     }
     
-    
-   
-    
-    
-    
-  
-    
- 
 
     
     

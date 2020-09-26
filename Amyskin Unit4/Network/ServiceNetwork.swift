@@ -24,7 +24,7 @@ class ServiceNetwork {
     
     let session = Session.instance
     var nextFromVKNews = ""
-    var offsetWall = 0
+    
     
     lazy var realm: Realm = {
         var config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
@@ -107,6 +107,43 @@ class ServiceNetwork {
                 
             }
         }
+        
+    }
+    
+    func getVideo(ownerId: Int, videoId:Int, completion: @escaping (String?) -> Void)   {
+        //print(#function)
+        var videoUrl: String?
+        let queryArray: [URLQueryItem] = [
+            URLQueryItem(name: "v", value: "5.124"),
+            URLQueryItem(name: "owner_id", value: "\(ownerId)"),
+            URLQueryItem(name: "count", value: "1"),
+            URLQueryItem(name: "videos", value: "\(ownerId)_\(videoId)"),
+            URLQueryItem(name: "access_token", value: session.token)
+        ]
+        getVkMetod(path: "/method/video.get", queryItem: queryArray){ jsonData in
+            
+       
+                
+                let swiftyJson = try? JSON(data: jsonData)
+                       guard
+                        let responseItems = swiftyJson?["response"]["items"].array
+                      
+                
+                else {return}
+                
+                videoUrl = responseItems.first?["player"].stringValue
+                
+                print(videoUrl ?? "no url ------------")
+                
+                completion(videoUrl)
+                
+                //let response = try JSONDecoder().decode(VKResponse<FriendData>.self, from: jsonData)
+                
+                //let items = response.items
+      
+        }
+        
+      
         
     }
     
@@ -200,14 +237,14 @@ class ServiceNetwork {
         }
     }
     
-    func getUserWall(friend: Int,_ callback: @escaping ( ([NewsOfUser]) -> Void)){
+    func getUserWall(friend: Int, lastRow: Int,_ callback: @escaping ( ([NewsOfUser]) -> Void)){
         //print(#function)
         
         let queryArray: [URLQueryItem] = [
             URLQueryItem(name: "v", value: "5.52"),
-            URLQueryItem(name: "count", value: "10"),
+            URLQueryItem(name: "count", value: "20"),
             URLQueryItem(name: "owner_id", value: "\(friend)"),
-            URLQueryItem(name: "offset", value: "\(offsetWall)"),
+            URLQueryItem(name: "offset", value: "\(lastRow)"),
             URLQueryItem(name: "access_token", value: session.token)
         ]
         getVkMetod(path: "/method/wall.get", queryItem: queryArray){[weak self] jsonData in
@@ -237,48 +274,92 @@ class ServiceNetwork {
         
     }
     
-    func getUserNewsFeed(newQuery: Bool = false ,_ callback: @escaping ( ([NewsOfUser]) -> Void)){
-        print(#function)
+    func getUserNewsFeed(from startTime: TimeInterval? = nil, newQuery: Bool = false ,_ callback: @escaping ( ([NewsItem]) -> Void)){
+        print(nextFromVKNews)
         
         if newQuery {
             nextFromVKNews = ""
         }
-        let queryArray: [URLQueryItem] = [
+        var queryArray: [URLQueryItem] = [
             URLQueryItem(name: "v", value: "5.120"),
             URLQueryItem(name: "count", value: "20"),
             URLQueryItem(name: "filters", value: "post,photo,wall_photo"),
             URLQueryItem(name: "start_from", value: nextFromVKNews),
             URLQueryItem(name: "access_token", value: session.token)
         ]
+        if let startTime = startTime {
+            queryArray.append(
+                URLQueryItem(name: "start_time", value: String(startTime))
+            )
+        }
         getVkMetod(path: "/method/newsfeed.get", queryItem: queryArray){[weak self] jsonData in
             guard let self = self else {return}
             
             
-//            self.parseNewsJSON(withDate: jsonData){(mynews) in
-//                callback(mynews)
-//            }
-            //
-            //              let json = try? JSONSerialization.jsonObject(with: jsonData, options: [])
-            //
-            //              print(json ?? "no json")
+            self.parseNewsFromJSON(withDate: jsonData){(mynews) in
+                callback(mynews)
+            }
+            
+//                          let json = try? JSONSerialization.jsonObject(with: jsonData, options: [])
+//            
+//                          print(json ?? "no json")
             
            //  Это основной способ
-                        DispatchQueue.global().async {
-                            do {
-                                let response = try JSONDecoder().decode(VKResponse<NewsFeedElement>.self, from: jsonData)
-            
-                                DispatchQueue.main.async {
-                                callback(self.convertNew(response: response))
-                                }
-            
-                            } catch {
-                                print(error)
-                                callback([])
-                            }
-                        }
+//            DispatchQueue.global().async {
+//                do {
+//                    let response = try JSONDecoder().decode(VKResponse<NewsFeedElement>.self, from: jsonData)
+//
+//                    DispatchQueue.main.async {
+//                        let news = self.convertNew(response: response)
+//
+//                        callback(news)
+//                        //                                    self.setVideoUrl(news: news) { (news) in
+//                        //                                            callback(news)
+//                        //                                        }
+//
+//                        // callback(self.convertNew(response: response))
+//                    }
+//
+//                } catch {
+//                    print(error)
+//                    callback([])
+//                }
+//            }
         }
         
     }
+    
+    
+       func parseNewsFromJSON(withDate data: Data, completion: @escaping ([NewsItem]) -> Void) {
+
+           
+        if let swiftyJson = try? JSON(data: data) {
+            
+            let responseGroup = swiftyJson["response"]["groups"].arrayValue.map {NewsItemProfile(json: $0)}
+            let responseProfiles = swiftyJson["response"]["profiles"].arrayValue.map {NewsItemProfile(json: $0)}
+            let responseItems = swiftyJson["response"]["items"].arrayValue.map {NewsItem(json: $0)}
+            
+            let allProfiles = responseGroup + responseProfiles
+            
+          
+            
+            
+            for (index, news) in responseItems.enumerated() {
+                responseItems[index].profile = allProfiles
+                    .first(where: {abs(news.sourceId) == $0.id })
+            }
+            
+            
+            completion(responseItems)
+        }
+        
+               
+               
+           
+    
+           
+       }
+    
     
     func parseNewsJSON(withDate data: Data, completion: @escaping ([NewsOfUser]) -> Void) {
         var tmpNews: [NewsOfUser] = []
@@ -322,7 +403,7 @@ class ServiceNetwork {
             }
             
             
-            completion(tmpNews)
+             completion(tmpNews)
             
             
         }
@@ -371,11 +452,7 @@ class ServiceNetwork {
                 let photosSizes = photos?.first?["sizes"].array
                 let index = (photosSizes?.count ?? 1) - 1
                 photosSizesUrl = photosSizes?[index]["url"].string ?? ""
-                //print(photosSizesUrl)
-                
-                //                                     likesCount = attachment.likes?.count ?? 0
-                //                                           countOfReposts = attachment.reposts?.count ?? 0
-                //                                           countOfComents = attachment.comments?.count ?? 0
+    
                 
                 viewsCount = photos?.first?["comments"]["count"].int ?? 0
                 likesCount = photos?.first?["likes"]["count"].int ?? 0
@@ -529,12 +606,16 @@ class ServiceNetwork {
         var author = ""
         var avatarUrl = ""
         var attachmentFotoSizeDicUrl: String = ""
+        var ownerId: Int?
+        var videoId: Int?
+        //var videoUrl: String?
+          
         
         let news = response.items
         guard let profiles = response.profiles,
-            let group = response.groups,
-            let nextFrom = response.nextFrom else {return []}
-        self.nextFromVKNews = nextFrom
+            let group = response.groups
+             else {return []}
+        self.nextFromVKNews = response.nextFrom ?? ""
         
         
         
@@ -563,7 +644,15 @@ class ServiceNetwork {
             let countOfComents = news.comments?.count ?? 0
             if let newsAttach = news.attachments {
                 
+                
+                
+       
+                
+                
                 newsAttach.forEach{(attachment) in
+                    
+             
+                    
                     if attachment.type == AttachmentEnum.photo.rawValue{
                         
                         guard let photo = attachment.photo else {return}
@@ -572,10 +661,22 @@ class ServiceNetwork {
                         attachmentFotoSizeDicUrl = photo.sizes[index].url ?? ""
                     }
                     if attachment.type == AttachmentEnum.video.rawValue{
-                        guard let video = attachment.video else {return}
+                        guard let video = attachment.video
+                        else {return}
                         let index = video.image.count - 1
                         
+                        ownerId = video.ownerId
+                        videoId = video.id
+                        
                         attachmentFotoSizeDicUrl = video.image[index].url ?? ""
+                        
+//                        getVideo(ownerId: ownerId, videoId: id){ (url) in
+//
+//                           videoUrl = url
+//
+//
+//                        }
+                        
                         
                     }
                     if attachment.type == AttachmentEnum.doc.rawValue{
@@ -586,7 +687,7 @@ class ServiceNetwork {
                         
                     }
                     if attachment.type == AttachmentEnum.link.rawValue{
-                        guard let link = attachment.link?.photo.sizes else {return}
+                        guard let link = attachment.link?.photo?.sizes else {return}
                         let index = link.count - 1
                         
                         attachmentFotoSizeDicUrl = link[index].url ?? ""
@@ -594,20 +695,30 @@ class ServiceNetwork {
                     }
                 }
                 
-                let tmpNew: NewsOfUser = NewsOfUser(type: newsType,
-                                                    author: author,
-                                                    avatarUrl: avatarUrl,
-                                                    imageUrl: [attachmentFotoSizeDicUrl],
-                                                    attachments: nil,
-                                                    date: newsDate,
-                                                    newsTest: newsText ?? "",
-                                                    countOfViews: countOfViews,
-                                                    countOfLike: likesCount,
-                                                    countOfReposts: countOfReposts,
-                                                    countOfComents: countOfComents,
-                                                    isLiked: true)
-                
+              
+                    
+                    let tmpNew: NewsOfUser = NewsOfUser(type: newsType,
+                                                           author: author,
+                                                           avatarUrl: avatarUrl,
+                                                           imageUrl: [attachmentFotoSizeDicUrl],
+                                                           ownerId: ownerId,
+                                                           videoId: videoId,
+                                                           attachments: nil,
+                                                           date: newsDate,
+                                                           newsTest: newsText ?? "",
+                                                           countOfViews: countOfViews,
+                                                           countOfLike: likesCount,
+                                                           countOfReposts: countOfReposts,
+                                                           countOfComents: countOfComents,
+                                                           isLiked: true)
+                       
                 tmpNews.append(tmpNew)
+//                setVideoUrl(news: tmpNew){ (new) in
+//                    tmpNews.append(new)
+//
+//                }
+                
+                //фывафыва
             }
             
             
@@ -626,6 +737,7 @@ class ServiceNetwork {
                     let index = attachment.sizes.count - 1
                     
                     attachmentFotoSizeDicUrl = attachment.sizes[index].url ?? ""
+                    //attachmentFotoSizeDicUrl = attachment.sizes.first?.url ?? ""
                     
                     likesCount = attachment.likes?.count ?? 0
                     countOfReposts = attachment.reposts?.count ?? 0
@@ -646,22 +758,72 @@ class ServiceNetwork {
                                                     countOfComents: countOfComents,
                                                     isLiked: true)
                 
+      
+                
                 tmpNews.append(tmpNew)
             }
             
         }
+        
+        
+//        for (index, news) in tmpNews.enumerated(){
+//            setVideoUrl(news: news){_ in
+//
+//            }
+//        }
+        
+   //print(tmpNews)
+        
+        
         return tmpNews
     }
+    
+    func setVideoUrl(news: [NewsOfUser], completion: @escaping ([NewsOfUser]) -> Void){
+        
+        guard news.count > 0 else {completion(news)
+            return}
+        var tmpNews = news
+        for (index, news) in tmpNews.enumerated(){
+            if let ownerId = news.ownerId,
+                let id = news.videoId {
+                
+                    
+                
+                        getVideo(ownerId: ownerId, videoId: id){ (url) in
+                    
+                        tmpNews[index].videoUrl = url
+                            completion(tmpNews)
+                        }
+                    
+            }
+        }
+        
+    }
+    func getVideoUrl(news: NewsOfUser, completion: @escaping (NewsOfUser) -> Void){
+         var tmpNews = news
+        
+             if let ownerId = news.ownerId,
+                 let id = news.videoId {
+                 
+                     
+                 
+                         getVideo(ownerId: ownerId, videoId: id){ (url) in
+                     
+                         tmpNews.videoUrl = url
+                             completion(tmpNews)
+                         }
+                     
+             }
+         
+         
+     }
     
     func convertWall(response : [WallUserElement]) -> [NewsOfUser]{
         
         var tmpNews: [NewsOfUser] = []
         
         var attachmentFotoSizeDicUrl: [String] = []
-        
-        
-        self.offsetWall += 10
-        
+    
         
         response.forEach{(news) in
             
@@ -966,6 +1128,28 @@ class ServiceNetwork {
                 friend.foto.append(objectsIn: objects)
             }
         }catch{
+            print(error)
+        }
+    }
+    
+     func addToMyGroup(_ group: GroupData) {
+
+        
+        do {
+            try realm.write {
+                realm.add(group, update: .modified)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+     func deleteMyGroup(_ group: GroupData) {
+        do {
+            try realm.write {
+                realm.delete(group)
+            }
+        } catch {
             print(error)
         }
     }

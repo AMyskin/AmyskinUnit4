@@ -35,7 +35,7 @@ class NewsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, News
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        service.getUserWall(friend: friend.id, {[weak self] (news) in
+        service.getUserWall(friend: friend.id, lastRow: 0, {[weak self] (news) in
             guard let self = self else {return}
             
             self.newsTest = news
@@ -142,8 +142,8 @@ class NewsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, News
     
     private func fetchData(_ lastRow: Int){
         
-
-            service.getUserWall(friend: friend.id,{(newsIn) in
+print("Последний индекс = \(lastRow)")
+        service.getUserWall(friend: friend.id, lastRow: lastRow,{(newsIn) in
                 
              
             self.newsTest.append(contentsOf: newsIn)
@@ -360,16 +360,6 @@ class NewsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, News
         }
         return photos
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
 

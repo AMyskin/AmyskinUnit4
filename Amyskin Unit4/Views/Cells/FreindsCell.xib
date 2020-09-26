@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -19,9 +19,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUC-pX-Jyy">
-                                <rect key="frame" x="20" y="9.5" width="304" height="25.5"/>
+                                <rect key="frame" x="20" y="9.5" width="200" height="25.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="zY2-t3-7L5"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="zY2-t3-7L5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="21"/>
                                 <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -39,7 +39,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="OUC-pX-Jyy" firstAttribute="leading" secondItem="JPQ-mv-UpL" secondAttribute="leading" constant="20" id="Ghh-5k-IzR"/>
-                            <constraint firstItem="7Ja-oW-gLg" firstAttribute="leading" secondItem="OUC-pX-Jyy" secondAttribute="trailing" constant="20" id="UMn-2d-zWn"/>
                             <constraint firstItem="7Ja-oW-gLg" firstAttribute="centerY" secondItem="JPQ-mv-UpL" secondAttribute="centerY" id="WfB-AZ-hnL"/>
                             <constraint firstAttribute="trailing" secondItem="7Ja-oW-gLg" secondAttribute="trailing" constant="30" id="dXA-BE-27Z"/>
                             <constraint firstItem="OUC-pX-Jyy" firstAttribute="centerY" secondItem="JPQ-mv-UpL" secondAttribute="centerY" id="k6e-jr-HRR"/>

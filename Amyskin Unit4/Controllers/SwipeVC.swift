@@ -7,34 +7,15 @@
 //
 
 import UIKit
-//import Kingfisher
+
 
 class SwipeVC: UIViewController {
     
     
     var imageURL: String?
-//    {
-//        didSet{
-//            if let imageURL = imageURL, let url = URL(string: imageURL) {
-//                image.kf.setImage(with: url)
-//            } else {
-//                image.image = nil
-//                image.kf.cancelDownloadTask()
-//            }
-//        }
-//    }
+
     var nextImageURL: String?
-//    {
-//        didSet{
-//            if let nextImageURL = nextImageURL, let url = URL(string: nextImageURL) {
-//                nextImageView.kf.setImage(with: url)
-//            } else {
-//                nextImageView.image = nil
-//                nextImageView.kf.cancelDownloadTask()
-//            }
-//        }
-//    }
-    
+
     var swipeInteractionController: SwipeInteractionController?
     
     var transitionController: TransitionController? {
@@ -69,15 +50,13 @@ class SwipeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         //print(#function)
-        //print("indexOfImage=\(indexOfImage)")
-         image.image = userImage[indexOfImage]
+        print("indexOfImage=\(indexOfImage)")
+        image.image = userImage[indexOfImage]
         //imageURL = userImageUrl[indexOfImage]
-         indexOfPhotoLabel.text = "\(indexOfImage+1)"
+        indexOfPhotoLabel.text = "\(indexOfImage+1)"
         transitionController?.endView = image
         
-       // image.imageSizeAfterAspectFit
         
-        //print("image size = \(image.contentClippingRect)")
     }
     
     // MARK: UICollectionViewDataSource
@@ -150,7 +129,7 @@ class SwipeVC: UIViewController {
                 })
                 if canSlide(myPanWay){
                     let nextIndex = myPanWay == .RightToLeft ? indexOfImage + 1 : indexOfImage - 1
-                    //nextImageView.image = userImage[nextIndex]
+                    nextImageView.image = userImage[nextIndex]
                     nextImageURL = userImageUrl[nextIndex]
                     
                     view.addSubview(nextImageView)
@@ -174,7 +153,7 @@ class SwipeVC: UIViewController {
                     self.image.alpha = 1
                     self.indexOfPhotoLabel.text = "\(self.indexOfImage+1)"
                     self.viewBeforeImage.transform = .identity
-                    //self.image.image = self.userImage[self.indexOfImage]
+                    self.image.image = self.userImage[self.indexOfImage]
                     self.imageURL = self.userImageUrl[self.indexOfImage]
                     self.nextImageView.removeFromSuperview()
                 }

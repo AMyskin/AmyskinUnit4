@@ -130,7 +130,7 @@ struct Doc: Codable {
 // MARK: - Preview
 struct Preview: Codable {
     let photo: PreviewPhoto
-    let video: VideoElement
+    let video: VideoElement?
 }
 
 // MARK: - PreviewPhoto
@@ -147,11 +147,14 @@ struct VideoElement: Codable {
     let url: String?
     let withPadding: Int?
 
+
+
     enum CodingKeys: String, CodingKey {
         case src, width, height, type
         case fileSize = "file_size"
         case url
         case withPadding = "with_padding"
+
     }
 }
 
@@ -159,7 +162,7 @@ struct VideoElement: Codable {
 struct Link: Codable {
     let url: String
     let title, linkDescription, target: String?
-    let photo: LinkPhoto
+    let photo: LinkPhoto?
     //let isFavorite: Bool
 
     enum CodingKeys: String, CodingKey {
@@ -216,6 +219,8 @@ struct AttachmentVideo: Codable {
     let image: [VideoElement] //,firstFrame: [VideoElement]
     let title: String
     let views: Int
+    let id: Int?
+    let ownerId: Int?
 
     enum CodingKeys: String, CodingKey {
     
@@ -224,6 +229,8 @@ struct AttachmentVideo: Codable {
         case image
         case title
         case views
+        case id
+        case ownerId = "owner_id"
     }
 }
 
