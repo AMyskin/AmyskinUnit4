@@ -24,6 +24,7 @@ class ServiceNetwork {
     
     let session = Session.instance
     var nextFromVKNews = ""
+  
     
     
     lazy var realm: Realm = {
@@ -274,16 +275,20 @@ class ServiceNetwork {
         
     }
     
-    func getUserNewsFeed(from startTime: TimeInterval? = nil, newQuery: Bool = false ,_ callback: @escaping ( ([NewsItem]) -> Void)){
-        print(nextFromVKNews)
+    func getUserNewsFeed(from startTime: TimeInterval? = nil,
+                         
+                         _ callback: @escaping ( ([NewsItem]) -> Void)){
+        //print(nextFromVKNews)
         
-        if newQuery {
-            nextFromVKNews = ""
-        }
+//        if newQuery {
+//                 nextFromVKNews = ""
+//             }
+        
+   
         var queryArray: [URLQueryItem] = [
             URLQueryItem(name: "v", value: "5.120"),
             URLQueryItem(name: "count", value: "20"),
-            URLQueryItem(name: "filters", value: "post,photo,wall_photo"),
+            URLQueryItem(name: "filters", value: "post,photo,wall_photo"), //wall_photo
             URLQueryItem(name: "start_from", value: nextFromVKNews),
             URLQueryItem(name: "access_token", value: session.token)
         ]
@@ -292,11 +297,12 @@ class ServiceNetwork {
                 URLQueryItem(name: "start_time", value: String(startTime))
             )
         }
-        getVkMetod(path: "/method/newsfeed.get", queryItem: queryArray){[weak self] jsonData in
+        getVkMetod(path: "/method/newsfeed.get", queryItem: queryArray){[weak self] data in
             guard let self = self else {return}
             
             
-            self.parseNewsFromJSON(withDate: jsonData){(mynews) in
+            self.parseNewsFromJSON(withDate: data){[weak self](mynews, nextFrom) in
+                self?.nextFromVKNews = nextFrom
                 callback(mynews)
             }
             
@@ -330,7 +336,7 @@ class ServiceNetwork {
     }
     
     
-       func parseNewsFromJSON(withDate data: Data, completion: @escaping ([NewsItem]) -> Void) {
+       func parseNewsFromJSON(withDate data: Data, completion: @escaping ([NewsItem],String) -> Void) {
 
            
         if let swiftyJson = try? JSON(data: data) {
@@ -338,7 +344,7 @@ class ServiceNetwork {
             let responseGroup = swiftyJson["response"]["groups"].arrayValue.map {NewsItemProfile(json: $0)}
             let responseProfiles = swiftyJson["response"]["profiles"].arrayValue.map {NewsItemProfile(json: $0)}
             let responseItems = swiftyJson["response"]["items"].arrayValue.map {NewsItem(json: $0)}
-            
+            let nextFrom = swiftyJson["response"]["next_from"].stringValue
             let allProfiles = responseGroup + responseProfiles
             
           
@@ -350,7 +356,7 @@ class ServiceNetwork {
             }
             
             
-            completion(responseItems)
+            completion(responseItems,nextFrom)
         }
         
                
@@ -615,7 +621,7 @@ class ServiceNetwork {
         guard let profiles = response.profiles,
             let group = response.groups
              else {return []}
-        self.nextFromVKNews = response.nextFrom ?? ""
+        //self.nextFromVKNews = response.nextFrom ?? ""
         
         
         
@@ -799,24 +805,24 @@ class ServiceNetwork {
         }
         
     }
-    func getVideoUrl(news: NewsOfUser, completion: @escaping (NewsOfUser) -> Void){
-         var tmpNews = news
-        
-             if let ownerId = news.ownerId,
-                 let id = news.videoId {
-                 
-                     
-                 
-                         getVideo(ownerId: ownerId, videoId: id){ (url) in
-                     
-                         tmpNews.videoUrl = url
-                             completion(tmpNews)
-                         }
-                     
-             }
-         
-         
-     }
+//    func getVideoUrl(news: NewsOfUser, completion: @escaping (NewsOfUser) -> Void){
+//         var tmpNews = news
+//        
+//             if let ownerId = news.ownerId,
+//                 let id = news.videoId {
+//                 
+//                     
+//                 
+//                         getVideo(ownerId: ownerId, videoId: id){ (url) in
+//                     
+//                         tmpNews.videoUrl = url
+//                             completion(tmpNews)
+//                         }
+//                     
+//             }
+//         
+//         
+//     }
     
     func convertWall(response : [WallUserElement]) -> [NewsOfUser]{
         

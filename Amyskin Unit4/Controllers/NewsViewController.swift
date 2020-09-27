@@ -19,6 +19,7 @@ final class NewsViewController: UITableViewController, UITableViewDataSourcePref
     lazy var photoService = PhotoService(container: self.tableView)
     var news: [NewsItem] = []
     var isLoading = false
+    //var nextFromId = ""
     
     lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -33,6 +34,7 @@ final class NewsViewController: UITableViewController, UITableViewDataSourcePref
         //news = (1...5).map { _ in NewsOfUser.randomOne }
         //service.getUserWall()
         
+        setupTable()
         
         self.setLoadingScreen()
         tableView.prefetchDataSource = self
@@ -44,19 +46,28 @@ final class NewsViewController: UITableViewController, UITableViewDataSourcePref
 
     }
     
+    private func setupTable(){
+        tableView.register(NewsPostCell.self, forCellReuseIdentifier: "PostCell")
+        tableView.register(NewsPhotoCell.self, forCellReuseIdentifier: "PhotoCell")
+        
+    }
+    
     
     private func setupRefreshControl(){
         refreshControl = UIRefreshControl()
-           refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        let attr: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.systemBlue
+        ]
+           refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: attr)
            refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
     }
     
     func getUserFeed(){
         
-        service.getUserNewsFeed(newQuery : true){[weak self](newsIn) in
+        service.getUserNewsFeed(){[weak self](newsIn) in
             guard let self = self else {return}
             self.news = newsIn
-            
+            //self.nextFromId = next
                 self.tableView.reloadData()
                 self.removeLoadingScreen()
                 
@@ -67,12 +78,13 @@ final class NewsViewController: UITableViewController, UITableViewDataSourcePref
     @objc func handleRefreshControl() {
          // Update your content…
         let mostFreshNewsDate = (self.news.first?.date ?? Date()).timeIntervalSince1970
-        service.getUserNewsFeed(from: mostFreshNewsDate + 1, newQuery: true){ [weak self](freshNews) in
+        service.getUserNewsFeed(from: mostFreshNewsDate + 1){ [weak self](freshNews) in
             guard let self = self else {return}
             self.refreshControl?.endRefreshing()
             guard freshNews.count > 0 else {return}
             
             self.news = freshNews + self.news
+             //self.nextFromId = next
             
             let indexPaths = (0..<freshNews.count)
                 .map {IndexPath(item: $0, section: 0)}
@@ -81,6 +93,11 @@ final class NewsViewController: UITableViewController, UITableViewDataSourcePref
             
         }
       }
+    
+    @objc func expandCollapse(sender:UIButton) {
+        
+        self.tableView.reloadData()
+    }
 
     
     // MARK: - UITableViewDataSource & UITableViewDelegate
@@ -88,50 +105,68 @@ final class NewsViewController: UITableViewController, UITableViewDataSourcePref
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return news.count
     }
+    
+    
+ 
+    
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let postNews = news[indexPath.row]
-        if postNews.type == .wallPhoto {
-            //print("wall_photo")
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotoNewsCell
-            cell.configure(item: news[indexPath.row], dateFormatter: dateFormatter)
-            
-            cell.authorImageView.image = photoService.photo(
-                           at: indexPath,
-                           url: news[indexPath.row].avatarUrl
-                       )
-            cell.photoImageView.image = photoService.photo(
-                            at: indexPath,
-                            url: news[indexPath.row].imageUrl?.first
-                        )
-
-            return cell
-        } else if (postNews.videoUrl != nil) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! VideoNewsCell
-            cell.configure(item: news[indexPath.row], dateFormatter: dateFormatter)
-            cell.authorImageView.image = photoService.photo(
-                at: indexPath,
-                url: news[indexPath.row].avatarUrl
-            )
-         
+        let item = news[indexPath.row]
         
-        return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! NewsCell
-                     cell.configure(item: news[indexPath.row], dateFormatter: dateFormatter)
-                     cell.authorImageView.image = photoService.photo(
-                         at: indexPath,
-                         url: news[indexPath.row].avatarUrl
-                     )
-                     cell.photoImageView.image = photoService.photo(
-                         at: indexPath,
-                         url: news[indexPath.row].imageUrl?.first
-                     )
-                 
-                 return cell
+        switch item.type {
+        case .post:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! NewsPostCell
+            //cell.button.isUserInteractionEnabled = tableView.isEditing
+            cell.button.addTarget(self, action: #selector(NewsViewController.expandCollapse(sender:)), for: .touchUpInside)
+            cell.configure(item: news[indexPath.row], dateFormatter: dateFormatter)
+            return cell
+        case .photo:
+             let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! NewsPhotoCell
+            cell.configure(item: news[indexPath.row], dateFormatter: dateFormatter)
+            return cell
         }
+
     }
+
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+         let item = news[indexPath.row]
+        // guard let cell = tableView.cellForRow(at: indexPath) as? NewsBaseCell
+        //                     else {return UITableView.automaticDimension}
+        let headerHeight = CGFloat(40)
+        let footerHeight = CGFloat(24)
+      
+        let cellInset = NewsBaseCell.inset * 2
+        
+         switch item.type {
+         case .photo:
+                
+                 let containerWidth = tableView.frame.width
+
+                 let imageHeight = containerWidth * (item.photo?.aspectRatio ?? 1)
+                 
+             
+           //  print("aspectRatio = \(item.photo?.aspectRatio) /n hight= \(imageHeight + cellInset) ")
+                 return headerHeight + imageHeight + footerHeight + cellInset
+        case .post:
+//             guard let cell = tableView.cellForRow(at: indexPath) as? NewsPostCell
+//                 else {return UITableView.automaticDimension}
+//
+//             let cellHight = cell.stackTextView.frame.height
+             //let textHight = cell.textView.frame.height
+            
+            //let textSize = getTextSize(text: item.text ?? "", font: UIFont(name: "system", size: 12) ?? UIFont())
+            //let textHeight = textSize.height
+             //let cellHight = size.height > 200 ? 200 + cellInset : size.height + cellInset
+             
+             //print("Высота теста равна = \(textHight)")
+             
+             //return headerHeight + textHeight + footerHeight + cellInset
+            
+            return UITableView.automaticDimension
+         }
+     }
+
 //    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 //        let lastRow = indexPath.row
 //        if lastRow == news.count - 1 {
@@ -148,12 +183,13 @@ final class NewsViewController: UITableViewController, UITableViewDataSourcePref
                 isLoading == false
             else { return }
         isLoading = true
-        self.service.getUserNewsFeed{[weak self](freshNews) in
+        self.service.getUserNewsFeed(){[weak self](freshNews) in
             guard let self = self else {return}
             
             let newsCount = self.news.count
             
             self.news.append(contentsOf: freshNews)
+            //self.nextFromId = next
             
             let indexPaths = (newsCount..<(newsCount + freshNews.count))
                 .map {IndexPath(item: $0, section: 0)}

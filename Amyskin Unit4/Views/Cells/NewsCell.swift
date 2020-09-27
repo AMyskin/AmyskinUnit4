@@ -11,11 +11,14 @@ import UIKit
 
 final class NewsCell: UITableViewCell {
     
+    let insets: CGFloat = 10
+    
     @IBOutlet weak var authorImageView: UIImageView!
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var publishedDateLabel: UILabel!
 
-    @IBOutlet weak var newsText: UITextView!
+    @IBOutlet weak var newsText: UILabel!
+    
     @IBOutlet weak var photoImageView: UIImageView!
     
 
@@ -53,26 +56,26 @@ final class NewsCell: UITableViewCell {
         authorImageView?.makeCircle()
     }
     
-    func configure(item: NewsOfUser, dateFormatter: DateFormatter) {
+    func configure(item: NewsItem, dateFormatter: DateFormatter) {
         
-        authorNameLabel.text = item.author
+        authorNameLabel.text = item.profile?.name
         publishedDateLabel.text = dateFormatter.string(from: item.date)
 
-        newsText.text = item.newsTest
+        newsText.text = item.text
         
-        if item.imageUrl == nil || item.imageUrl == [""] {
+        if  item.photo?.imageUrl == "" {
             photoImageView.isHidden = true
         } else {
             photoImageView.isHidden = false
         }
 
-        imageURL = item.imageUrl?.first
-        avatarURL = item.avatarUrl
+        imageURL = item.photo?.imageUrl
+        avatarURL = item.profile?.imageUrl
  
-        viewsButton.titleLabel?.text = item.countOfViews.getStringOfCount()
-        likeButton.titleLabel?.text = item.countOfLike.getStringOfCount()
-        commentsButton.titleLabel?.text = item.countOfComents.getStringOfCount()
-        repostsButton.titleLabel?.text = item.countOfReposts.getStringOfCount()
+        viewsButton.titleLabel?.text = String(item.viewsCount)
+        likeButton.titleLabel?.text = String(item.likesCount)
+        commentsButton.titleLabel?.text = String(item.commentCount)
+        repostsButton.titleLabel?.text = String(item.repostsCount)
         
         
       
@@ -96,5 +99,26 @@ final class NewsCell: UITableViewCell {
         //countOfViewLabel.text = nil
         // countOfLikeLabel.text = nil
     }
+    
+     func getLabelSize(text: String, font: UIFont) -> CGSize {
+            let maxWidth = bounds.width - insets * 2
+            let textBlock = CGSize(width: maxWidth,
+                                   height: CGFloat.greatestFiniteMagnitude)
+            
+            let rect = text.boundingRect(
+                with: textBlock,
+                options: .usesLineFragmentOrigin,
+                attributes: [.font: font],
+                context: nil
+            )
+            
+            let width = Double(rect.width)
+            let height = Double(rect.height)
+            
+            let size = CGSize(width: ceil(width), height: ceil(height))
+    //        let size = CGSize(width: width, height: height)
+
+            return size
+        }
     
 }

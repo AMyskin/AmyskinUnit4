@@ -56,17 +56,17 @@ final class PhotoNewsCell: UITableViewCell {
         authorImageView?.makeCircle()
     }
     
-    func configure(item: NewsOfUser, dateFormatter: DateFormatter) {
+    func configure(item: NewsItem, dateFormatter: DateFormatter) {
         
-        authorNameLabel.text = item.author
+        authorNameLabel.text = item.profile?.name
         publishedDateLabel.text = dateFormatter.string(from: item.date)
-        imageURL = item.imageUrl?.first
-        avatarURL = item.avatarUrl
+        imageURL = item.photo?.imageUrl
+        avatarURL = item.profile?.imageUrl
         
-        viewsButton.titleLabel?.text = item.countOfViews.getStringOfCount()
-        likeButton.titleLabel?.text = item.countOfLike.getStringOfCount()
-        commentsButton.titleLabel?.text = item.countOfComents.getStringOfCount()
-        repostsButton.titleLabel?.text = item.countOfReposts.getStringOfCount()
+        viewsButton.titleLabel?.text = String(item.photo?.viewsCount ?? 0)
+        likeButton.titleLabel?.text = String(item.photo?.likesCount ?? 0)
+        commentsButton.titleLabel?.text = String(item.photo?.commentCount ?? 0)
+        repostsButton.titleLabel?.text = String(item.photo?.repostsCount ?? 0)
 
     }
     
