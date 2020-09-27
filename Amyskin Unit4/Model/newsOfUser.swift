@@ -13,6 +13,9 @@ public struct NewsOfUser: Equatable {
     var author: String
     var avatarUrl: String?
     var imageUrl: [String]?
+    var videoUrl: String?
+    var ownerId: Int?
+    var videoId: Int?
    
     let attachments: [WallUserAttachment]?
     
