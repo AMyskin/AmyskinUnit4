@@ -9,7 +9,11 @@
 import UIKit
 //import Kingfisher
 
+
+
 final class NewsCell: UITableViewCell {
+    
+
     
     let insets: CGFloat = 10
     
@@ -84,6 +88,7 @@ final class NewsCell: UITableViewCell {
     
     @IBAction func buttonTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
+        
     }
     
     override func prepareForReuse() {

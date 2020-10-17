@@ -237,6 +237,85 @@ class ServiceNetwork {
             
         }
     }
+    func getFriendsPhotoForTexture(friend: Int, completion: @escaping ([Foto]) -> Void){
+        //print(#function)
+        let queryArray: [URLQueryItem] = [
+            URLQueryItem(name: "v", value: "5.52"),
+            URLQueryItem(name: "count", value: "50"),
+            URLQueryItem(name: "owner_id", value: "\(friend)"),
+            URLQueryItem(name: "access_token", value: session.token)
+        ]
+        getVkMetod(path: "/method/photos.getAll", queryItem: queryArray){jsonData in
+            
+            do {
+                
+                let fotos = try JSONDecoder().decode(VKResponse<FotoData>.self, from: jsonData).items
+                
+                let tmpFoto = self.convertFoto(response: fotos)
+                completion(tmpFoto)
+                
+                
+            } catch {
+                print(error)
+                
+            }
+            
+        }
+    }
+    
+    
+    func getAlbomVK(friend: Int, completion: @escaping ([AlbomVK]) -> Void){
+        //print(#function)
+        let queryArray: [URLQueryItem] = [
+            URLQueryItem(name: "v", value: "5.52"),
+            URLQueryItem(name: "count", value: "50"),
+            URLQueryItem(name: "owner_id", value: "\(friend)"),
+            URLQueryItem(name: "access_token", value: session.token)
+        ]
+        getVkMetod(path: "/method/photos.getAlbums", queryItem: queryArray){jsonData in
+            
+            do {
+                
+                let alboms = try JSONDecoder().decode(VKResponse<AlbomVK>.self, from: jsonData).items
+            
+                completion(alboms)
+                
+                
+            } catch {
+                print(error)
+                
+            }
+            
+        }
+    }
+    
+    func getPhotoAlbomVK(friend: Int,albumId: Int, completion: @escaping ([Foto]) -> Void){
+        //print(#function)
+        let queryArray: [URLQueryItem] = [
+            URLQueryItem(name: "v", value: "5.52"),
+            URLQueryItem(name: "count", value: "50"),
+            URLQueryItem(name: "owner_id", value: "\(friend)"),
+            URLQueryItem(name: "album_id", value: "\(albumId)"),
+            URLQueryItem(name: "access_token", value: session.token)
+        ]
+        getVkMetod(path: "/method/photos.get", queryItem: queryArray){jsonData in
+            
+            do {
+                
+                let fotos = try JSONDecoder().decode(VKResponse<FotoData>.self, from: jsonData).items
+                
+                let tmpFoto = self.convertFoto(response: fotos)
+                completion(tmpFoto)
+                
+                
+            } catch {
+                print(error)
+                
+            }
+            
+        }
+    }
+    
     
     func getUserWall(friend: Int, lastRow: Int,_ callback: @escaping ( ([NewsOfUser]) -> Void)){
         //print(#function)
@@ -304,7 +383,9 @@ class ServiceNetwork {
             self.parseNewsFromJSON(withDate: data){[weak self](mynews, nextFrom) in
                 self?.nextFromVKNews = nextFrom
                 callback(mynews)
-            }
+//                self?.getVideo(ownerId: -52398072, videoId: 456263868){(testurl) in
+//                    print(testurl)}
+           }
             
 //                          let json = try? JSONSerialization.jsonObject(with: jsonData, options: [])
 //            

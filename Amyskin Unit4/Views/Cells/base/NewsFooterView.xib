@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewsFooterView">
             <connections>
-                <outlet property="commentsButton" destination="cSj-A4-T2R" id="nkD-QZ-Ltx"/>
-                <outlet property="contentView" destination="iN0-l3-epB" id="qst-H3-dsI"/>
-                <outlet property="likeButton" destination="cDQ-5r-5mx" id="eMT-HJ-8lJ"/>
-                <outlet property="repostsButton" destination="pEt-aP-z10" id="rrV-ic-6Id"/>
-                <outlet property="viewsButton" destination="AnO-P6-0f5" id="E8W-fF-Vj5"/>
+                <outlet property="commentsButton" destination="aGq-mx-rru" id="iew-6W-EGY"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="ZLb-4b-gVL"/>
+                <outlet property="likeButton" destination="cDQ-5r-5mx" id="NEY-mP-Leo"/>
+                <outlet property="repostsButton" destination="3WH-WI-Ayp" id="MOV-h9-OOI"/>
+                <outlet property="viewsButton" destination="Ow4-aO-RgN" id="Dme-5l-aRr"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -21,82 +23,53 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="24"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="4Hr-hN-CQG">
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" id="4Hr-hN-CQG">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cDQ-5r-5mx" userLabel="LikeButton">
-                            <rect key="frame" x="0.0" y="0.0" width="42.5" height="17.5"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="heart" catalog="system">
-                                <attributedString key="attributedTitle">
-                                    <fragment content="text">
-                                        <attributes>
-                                            <color key="NSColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" metaFont="label" size="12"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                            </state>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDQ-5r-5mx" userLabel="LikeButton">
+                            <rect key="frame" x="0.0" y="0.0" width="100" height="21.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="HuX-7s-Rpd"/>
+                            </constraints>
+                            <state key="normal" title="0" image="heart" catalog="system"/>
                             <state key="selected" image="heart.fill" catalog="system"/>
                             <connections>
-                                <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="V5Y-0B-ChK"/>
+                                <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="rTa-aJ-TGj"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cSj-A4-T2R" userLabel="commentsButton">
-                            <rect key="frame" x="121" y="0.0" width="44.5" height="19.5"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="text.bubble" catalog="system">
-                                <attributedString key="attributedTitle">
-                                    <fragment content="text">
-                                        <attributes>
-                                            <color key="NSColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" metaFont="label" size="12"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                            </state>
-                            <state key="selected" image="text.bubble.fill" catalog="system"/>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGq-mx-rru" userLabel="LikeButton">
+                            <rect key="frame" x="101.5" y="0.0" width="100" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="Ozh-Z7-IhC"/>
+                            </constraints>
+                            <state key="normal" title="0" image="text.bubble" catalog="system"/>
+                            <state key="selected" image="heart.fill" catalog="system"/>
                             <connections>
-                                <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="DA1-ic-EVp"/>
+                                <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="vcO-OQ-c8b"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pEt-aP-z10" userLabel="repostsButton">
-                            <rect key="frame" x="243.5" y="0.0" width="43" height="18"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="arrowshape.turn.up.right" catalog="system">
-                                <attributedString key="attributedTitle">
-                                    <fragment content="text">
-                                        <attributes>
-                                            <color key="NSColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" metaFont="label" size="12"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                            </state>
-                            <state key="selected" image="arrowshape.turn.up.right.fill" catalog="system"/>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WH-WI-Ayp" userLabel="LikeButton">
+                            <rect key="frame" x="202.5" y="0.0" width="100" height="21.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="s7l-uW-e8d"/>
+                            </constraints>
+                            <state key="normal" title="0" image="arrowshape.turn.up.forward" catalog="system"/>
+                            <state key="selected" image="heart.fill" catalog="system"/>
                             <connections>
-                                <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="EbE-93-1aP"/>
+                                <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="LU2-YW-0or"/>
                             </connections>
                         </button>
-                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AnO-P6-0f5" userLabel="ViewsButton">
-                            <rect key="frame" x="365" y="0.0" width="49" height="17.5"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="eye.fill" catalog="system">
-                                <attributedString key="attributedTitle">
-                                    <fragment content="text">
-                                        <attributes>
-                                            <color key="NSColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" metaFont="label" size="12"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                            </state>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ow4-aO-RgN" userLabel="LikeButton">
+                            <rect key="frame" x="304" y="0.0" width="110" height="20.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="110" id="BE3-00-Yy5"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <state key="normal" title="0" image="eye.fill" catalog="system"/>
+                            <state key="selected" image="heart.fill" catalog="system"/>
                             <connections>
-                                <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="fDT-YQ-0pb"/>
+                                <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="Sgl-VY-HeC"/>
                             </connections>
                         </button>
                     </subviews>
@@ -105,7 +78,8 @@
                     </constraints>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="4Hr-hN-CQG" secondAttribute="bottom" id="awV-3b-J15"/>
                 <constraint firstItem="4Hr-hN-CQG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="pdw-2H-lnH"/>
@@ -113,17 +87,17 @@
                 <constraint firstAttribute="trailing" secondItem="4Hr-hN-CQG" secondAttribute="trailing" id="vWB-6J-9Zs"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="132" y="101"/>
         </view>
     </objects>
     <resources>
-        <image name="arrowshape.turn.up.right" catalog="system" width="128" height="106"/>
-        <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="106"/>
+        <image name="arrowshape.turn.up.forward" catalog="system" width="128" height="106"/>
         <image name="eye.fill" catalog="system" width="128" height="78"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="text.bubble" catalog="system" width="128" height="110"/>
-        <image name="text.bubble.fill" catalog="system" width="128" height="110"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

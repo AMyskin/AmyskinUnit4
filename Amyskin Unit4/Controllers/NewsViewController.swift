@@ -8,7 +8,15 @@
 
 import UIKit
 
-final class NewsViewController: UITableViewController, UITableViewDataSourcePrefetching {
+
+
+final class NewsViewController: UITableViewController, UITableViewDataSourcePrefetching, NewsPostCellDelegate {
+  
+    
+    
+    
+
+
     
 
     let loadingView = UIView()
@@ -94,10 +102,11 @@ final class NewsViewController: UITableViewController, UITableViewDataSourcePref
         }
       }
     
-    @objc func expandCollapse(sender:UIButton) {
-        
-        self.tableView.reloadData()
-    }
+//    @objc func expandCollapse(sender:UIButton) {
+//
+//
+//        self.tableView.reloadData()
+//    }
 
     
     // MARK: - UITableViewDataSource & UITableViewDelegate
@@ -117,8 +126,9 @@ final class NewsViewController: UITableViewController, UITableViewDataSourcePref
         case .post:
             let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! NewsPostCell
             //cell.button.isUserInteractionEnabled = tableView.isEditing
-            cell.button.addTarget(self, action: #selector(NewsViewController.expandCollapse(sender:)), for: .touchUpInside)
+            //cell.button.addTarget(self, action: #selector(NewsViewController.expandCollapse(sender:)), for: .touchUpInside)
             cell.configure(item: news[indexPath.row], dateFormatter: dateFormatter)
+            cell.delegate = self
             return cell
         case .photo:
              let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! NewsPhotoCell
@@ -141,7 +151,7 @@ final class NewsViewController: UITableViewController, UITableViewDataSourcePref
          switch item.type {
          case .photo:
                 
-                 let containerWidth = tableView.frame.width
+                 let containerWidth = tableView.frame.width //- cellInset
 
                  let imageHeight = containerWidth * (item.photo?.aspectRatio ?? 1)
                  
@@ -261,6 +271,13 @@ final class NewsViewController: UITableViewController, UITableViewDataSourcePref
         spinner.isHidden = true
         loadingLabel.isHidden = true
 
+    }
+    
+    
+    func didTapShowMore(cell: NewsPostCell) {
+        tableView.beginUpdates()
+        cell.isExpanded.toggle()
+        tableView.endUpdates()
     }
     
 }

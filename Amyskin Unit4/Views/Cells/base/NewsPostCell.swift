@@ -8,13 +8,26 @@
 
 import UIKit
 
+protocol NewsPostCellDelegate: class {
+    func didTapShowMore(cell: NewsPostCell)
+}
+
 final class NewsPostCell: NewsBaseCell {
     
-    var textHightConstraint: NSLayoutConstraint?
+    weak var delegate: NewsPostCellDelegate?
+    
+    var isExpanded = false {
+        didSet {
+            updatePostLabel()
+            updateShowMoreButton()
+        }
+    }
+    
+    //var textHightConstraint: NSLayoutConstraint?
     
     lazy var stackTextView = UIStackView()
     lazy var textView = UILabel()
-    lazy var button = UIButton(type: .system)
+    lazy var button = UIButton(type: .custom)
     //lazy var textButton = UIButton()
     
     override func setup() {
@@ -24,10 +37,10 @@ final class NewsPostCell: NewsBaseCell {
         textView.translatesAutoresizingMaskIntoConstraints = false
         button.translatesAutoresizingMaskIntoConstraints = false
         textView.font = .systemFont(ofSize: 17)
-        textView.numberOfLines = 0
+        updatePostLabel()
         
-        textHightConstraint = textView.heightAnchor.constraint(equalToConstant: 200)
-        textHightConstraint?.isActive = true
+       // textHightConstraint = textView.heightAnchor.constraint(equalToConstant: 200)
+       // textHightConstraint?.isActive = true
       
         
         containerView.addSubview(stackTextView)
@@ -49,7 +62,7 @@ final class NewsPostCell: NewsBaseCell {
         
         stackTextView.axis = .vertical
         stackTextView.spacing = 8
-        stackTextView.alignment = .fill
+        stackTextView.alignment = .leading
         stackTextView.distribution = .fill
         
         
@@ -61,44 +74,44 @@ final class NewsPostCell: NewsBaseCell {
     
     func setupButton() {
         
+        updateShowMoreButton()
         
+        //button.setTitle("Show more", for: .normal)
+        button.setTitleColor(UIColor.blue, for: .normal)
+        //button.tintColor = UIColor.black
         
-        button.setTitle("Show more", for: .highlighted)
-        button.tintColor = UIColor.systemBlue
-        button.backgroundColor = UIColor.systemGray
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchDown)
-                            button.layer.borderWidth = 1
-                            button.layer.borderColor = UIColor.red.cgColor
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+                          //  button.layer.borderWidth = 1
+                          //  button.layer.borderColor = UIColor.red.cgColor
         stackTextView.addArrangedSubview(button)
-        button.heightAnchor.constraint(equalToConstant: 25).isActive = true
-       // button.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        
+        button.layer.cornerRadius = 0.5 * button.bounds.size.height
+        button.layer.shadowOffset = CGSize(width: 6, height: 6)
+        button.layer.shadowOpacity = 0.7
+        button.layer.shadowRadius = 6
+        
+        //button.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        //button.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        //button.clipsToBounds = true
+        //button.backgroundColor = UIColor.systemGray
         
         
     }
     
     @objc func buttonTapped(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        //contentView.layoutIfNeeded()
-        let textSize = getLabelSize(text: textView.text ?? "", font: textView.font)
-        if sender.isSelected {
-            
-           
-            textHightConstraint?.constant = textSize.height
-            
-            button.setTitle("Show less", for: .normal)
-            //contentView.layoutIfNeeded()
-        } else {
-
-            textHightConstraint?.constant = 200
-            
-            button.setTitle("Show more", for: .normal)
- 
-            
-            //contentView.layoutIfNeeded()
-        }
         
         
+        delegate?.didTapShowMore(cell: self)
         
+        
+    }
+    private func updatePostLabel(){
+        textView.numberOfLines = isExpanded ? 0 : 10
+    }
+    private func updateShowMoreButton() {
+        let title = isExpanded ? "Show less..." : "Show more..."
+        button.setTitle(title, for: .normal)
         
     }
     
@@ -108,16 +121,10 @@ final class NewsPostCell: NewsBaseCell {
         textView.text = item.text
         //textView.numberOfLines = 0
         let textSize = getLabelSize(text: item.text ?? "", font: textView.font)
-        if textSize.height < 200 {
-            textHightConstraint?.constant = textSize.height
+       
             
-            button.isHidden = true
-        } else {
-            textHightConstraint?.constant = 200
-            
-            
-            button.isHidden = false
-        }
+        button.isHidden = textSize.height < 200
+        
         
     }
     
@@ -145,9 +152,10 @@ final class NewsPostCell: NewsBaseCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         textView.text = ""
-        textHightConstraint?.constant = 0
+        isExpanded = false
+        //textHightConstraint?.constant = 0
         //containerView.removeFromSuperview()
-        
+
 
     }
     

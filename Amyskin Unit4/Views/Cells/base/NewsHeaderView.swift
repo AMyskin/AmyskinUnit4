@@ -51,7 +51,7 @@ final class NewsHeaderView: UIView {
     
     func configure(item: NewsItem, dateFormatter: DateFormatter) {
         
-        
+
         authorNameLabel.text = item.profile?.name
         publishedDateLabel.text = dateFormatter.string(from: item.date)
         

@@ -11,6 +11,9 @@
 		0A06777324E316D10054F274 /* Foto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A06777224E316D10054F274 /* Foto.swift */; };
 		0A0824E1251BDA89003BEBB6 /* FriendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0824E0251BDA89003BEBB6 /* FriendService.swift */; };
 		0A0824E3251BDFC9003BEBB6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0824E2251BDFC9003BEBB6 /* UIView+Extension.swift */; };
+		0A09A7D6253A4A5500DBCB6A /* PhotoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09A7D5253A4A5500DBCB6A /* PhotoNode.swift */; };
+		0A09A7DE253AD94600DBCB6A /* AlbomVK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09A7DD253AD94600DBCB6A /* AlbomVK.swift */; };
+		0A09A7E1253ADBDD00DBCB6A /* VKAlbomResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09A7E0253ADBDD00DBCB6A /* VKAlbomResponse.swift */; };
 		0A2339D5249E39BA00290688 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2339D4249E39BA00290688 /* UserCell.swift */; };
 		0A2339D7249E563E00290688 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2339D6249E563E00290688 /* CollectionViewController.swift */; };
 		0A2339D9249E57B200290688 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2339D8249E57B200290688 /* UserCollectionViewCell.swift */; };
@@ -30,6 +33,7 @@
 		0A35121B2514957C00A0658A /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A35121A2514957C00A0658A /* PromiseKit */; };
 		0A351221251496E500A0658A /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 0A351220251496E500A0658A /* SwiftyJSON */; };
 		0A50FF24250035AA00D10C39 /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50FF23250035AA00D10C39 /* IntExtension.swift */; };
+		0A6106152528C0C700E794DC /* ImagesAsyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6106142528C0C700E794DC /* ImagesAsyncController.swift */; };
 		0A62E0C824B206CE005D8CE1 /* SwipeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62E0C724B206CE005D8CE1 /* SwipeVC.swift */; };
 		0A62E0CA24B24D12005D8CE1 /* CustomActivitiIndicator2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62E0C924B24D12005D8CE1 /* CustomActivitiIndicator2.swift */; };
 		0A668DE024929BF800F860CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A668DDF24929BF800F860CB /* AppDelegate.swift */; };
@@ -108,6 +112,9 @@
 		0A06777224E316D10054F274 /* Foto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foto.swift; sourceTree = "<group>"; };
 		0A0824E0251BDA89003BEBB6 /* FriendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendService.swift; sourceTree = "<group>"; };
 		0A0824E2251BDFC9003BEBB6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		0A09A7D5253A4A5500DBCB6A /* PhotoNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNode.swift; sourceTree = "<group>"; };
+		0A09A7DD253AD94600DBCB6A /* AlbomVK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbomVK.swift; sourceTree = "<group>"; };
+		0A09A7E0253ADBDD00DBCB6A /* VKAlbomResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAlbomResponse.swift; sourceTree = "<group>"; };
 		0A2339D4249E39BA00290688 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		0A2339D6249E563E00290688 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		0A2339D8249E57B200290688 /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -122,6 +129,7 @@
 		0A2339F724ACC9B900290688 /* FreindsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FreindsCell.xib; sourceTree = "<group>"; };
 		0A257BAD2517C8E900B0645D /* PhotoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		0A50FF23250035AA00D10C39 /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
+		0A6106142528C0C700E794DC /* ImagesAsyncController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesAsyncController.swift; sourceTree = "<group>"; };
 		0A62E0C724B206CE005D8CE1 /* SwipeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeVC.swift; sourceTree = "<group>"; };
 		0A62E0C924B24D12005D8CE1 /* CustomActivitiIndicator2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivitiIndicator2.swift; sourceTree = "<group>"; };
 		0A668DDC24929BF800F860CB /* Amyskin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amyskin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -237,6 +245,7 @@
 				0A9C922B24D19B8100374903 /* Profiles.swift */,
 				0AFE7A6F24D5C44200E03CD6 /* GroupData.swift */,
 				0AFE7A8324D72E9700E03CD6 /* FotoData.swift */,
+				0A09A7DD253AD94600DBCB6A /* AlbomVK.swift */,
 				0A06777224E316D10054F274 /* Foto.swift */,
 				0ADE3AA724EBEC9700BC15C6 /* FirebaseUser.swift */,
 			);
@@ -284,6 +293,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		0A6106132528C05E00E794DC /* ImageAsync */ = {
+			isa = PBXGroup;
+			children = (
+				0A6106142528C0C700E794DC /* ImagesAsyncController.swift */,
+				0A09A7D5253A4A5500DBCB6A /* PhotoNode.swift */,
+			);
+			path = ImageAsync;
+			sourceTree = "<group>";
+		};
 		0A668DD324929BF800F860CB = {
 			isa = PBXGroup;
 			children = (
@@ -305,6 +323,7 @@
 		0A668DDE24929BF800F860CB /* Amyskin Unit4 */ = {
 			isa = PBXGroup;
 			children = (
+				0A6106132528C05E00E794DC /* ImageAsync */,
 				0AA27B5C24CB898C00AAC4E4 /* Network */,
 				0AA27B4A24CB6ACE00AAC4E4 /* App */,
 				0AA27B4924CB6AA900AAC4E4 /* Storyboards */,
@@ -438,6 +457,7 @@
 				0A9C921F24D04FC200374903 /* ServiceNetwork.swift */,
 				0A9170E325096BAF006498DA /* AsyncOperation.swift */,
 				0AE3897F24DC1254001B2BB9 /* VKResponse.swift */,
+				0A09A7E0253ADBDD00DBCB6A /* VKAlbomResponse.swift */,
 				0A257BAD2517C8E900B0645D /* PhotoService.swift */,
 				0A0824E0251BDA89003BEBB6 /* FriendService.swift */,
 			);
@@ -478,6 +498,7 @@
 				0A668DD824929BF800F860CB /* Sources */,
 				0A668DD924929BF800F860CB /* Frameworks */,
 				0A668DDA24929BF800F860CB /* Resources */,
+				79B836FC57FD43A9B6B2AFE7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -503,7 +524,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Alexander Myskin";
 				TargetAttributes = {
 					0A668DDB24929BF800F860CB = {
@@ -559,6 +580,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		79B836FC57FD43A9B6B2AFE7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Amyskin Unit4/Pods-Amyskin Unit4-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Amyskin Unit4/Pods-Amyskin Unit4-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Amyskin Unit4/Pods-Amyskin Unit4-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		911DAAD0E4F40EC0E8BAEF2F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -600,6 +638,7 @@
 				0AA27B5924CB7FEA00AAC4E4 /* UIViewExtension.swift in Sources */,
 				0AFE7A7C24D7250C00E03CD6 /* PhotosViewController.swift in Sources */,
 				0A6C8ED624B5E8640098E340 /* CustomPushAnimator.swift in Sources */,
+				0A09A7DE253AD94600DBCB6A /* AlbomVK.swift in Sources */,
 				0A74968724ACF6D6008EE3E3 /* NewsVC.swift in Sources */,
 				0AFE7A7B24D7250C00E03CD6 /* SliderViewController.swift in Sources */,
 				0AE68AA724B0E315007647B0 /* CustomActivitiVC.swift in Sources */,
@@ -614,6 +653,7 @@
 				0A62E0C824B206CE005D8CE1 /* SwipeVC.swift in Sources */,
 				0A50FF24250035AA00D10C39 /* IntExtension.swift in Sources */,
 				0A06777324E316D10054F274 /* Foto.swift in Sources */,
+				0A09A7D6253A4A5500DBCB6A /* PhotoNode.swift in Sources */,
 				0A6C8EDF24B6515B0098E340 /* PopAnimator.swift in Sources */,
 				0A2339E1249E901600290688 /* GroupCell.swift in Sources */,
 				0ADEC717251FFE3B001BA984 /* NewsPhotoCell.swift in Sources */,
@@ -626,10 +666,12 @@
 				0A82104D24B8C964007B44A3 /* extansion_UIImage.swift in Sources */,
 				0A82104F24B8F283007B44A3 /* SwipeInteractionController.swift in Sources */,
 				0A9C922C24D19B8100374903 /* Profiles.swift in Sources */,
+				0A6106152528C0C700E794DC /* ImagesAsyncController.swift in Sources */,
 				0ADEC708251FA738001BA984 /* NewsItem.swift in Sources */,
 				0AFDB0A424C2352000A1BEF0 /* ZoomDismissalInteractionController.swift in Sources */,
 				0A2339F824ACC9B900290688 /* FreindsCell.swift in Sources */,
 				0A668DE024929BF800F860CB /* AppDelegate.swift in Sources */,
+				0A09A7E1253ADBDD00DBCB6A /* VKAlbomResponse.swift in Sources */,
 				0AE50E7A24BF8DDD00D7673D /* Animator.swift in Sources */,
 				0AA27B5524CB7C3F00AAC4E4 /* LoremExtension.swift in Sources */,
 				0A2339F124A72BD300290688 /* LikeView.swift in Sources */,
@@ -713,6 +755,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -773,6 +816,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

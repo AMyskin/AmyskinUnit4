@@ -28,6 +28,8 @@ class NewsBaseCell: UITableViewCell {
     
     func setup() {
         
+        selectionStyle = .none
+        
         stackView.translatesAutoresizingMaskIntoConstraints = false
         headerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.translatesAutoresizingMaskIntoConstraints = false

@@ -12,5 +12,6 @@ target 'Amyskin Unit4' do
   #pod 'Kingfisher', '~> 5.0'
   #pod 'RealmSwift'
   #pod 'SwiftyJSON', '~> 4.0'
+  pod 'Texture'
 
 end

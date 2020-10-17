@@ -13,6 +13,7 @@ final class NewsFooterView: UIView {
     @IBOutlet weak var contentView: UIView!
     
     
+    
     @IBOutlet weak var viewsButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentsButton: UIButton!
@@ -31,15 +32,22 @@ final class NewsFooterView: UIView {
         Bundle.main.loadNibNamed("NewsFooterView", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
       func configure(item: NewsItem) {
-    
-           viewsButton.titleLabel?.text = String(item.viewsCount)
-           likeButton.titleLabel?.text = String(item.likesCount)
-           commentsButton.titleLabel?.text = String(item.commentCount)
-           repostsButton.titleLabel?.text = String(item.repostsCount)
+        
+        
+        //testLabel.text = String(item.likesCount)
+       
+        
+        viewsButton.setTitle(String(item.viewsCount), for: .normal)
+        likeButton.setTitle(String(item.likesCount), for: .normal)
+        commentsButton.setTitle(String(item.commentCount), for: .normal)
+        repostsButton.setTitle(String(item.repostsCount), for: .normal)
+
+        
+        
 
        }
     

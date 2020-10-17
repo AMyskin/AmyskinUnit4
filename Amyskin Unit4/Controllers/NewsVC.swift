@@ -59,12 +59,16 @@ class NewsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, News
     @objc func addTapped(_ sender: UIButton) {
         
         
+        let controller = ImagesAsyncController()
+        controller.userId = friend.id
+        navigationController?.pushViewController(controller, animated: true)
         
-        guard  let photoVC = PhotosViewController.storyboardInstance() else {return}
         
-        photoVC.userId = friend.id
-        
-        navigationController?.pushViewController(photoVC, animated: true)
+//        guard  let photoVC = PhotosViewController.storyboardInstance() else {return}
+//
+//        photoVC.userId = friend.id
+//
+//        navigationController?.pushViewController(photoVC, animated: true)
         
         
     }
