@@ -424,6 +424,28 @@
             </objects>
             <point key="canvasLocation" x="3479.7101449275365" y="1872.9910714285713"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="cOg-AD-kBe">
+            <objects>
+                <viewController id="7Ox-Xi-4jI" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fkc-oO-5yE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOQ-qt-ZkU">
+                                <rect key="frame" x="153" y="351" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="rf3-RL-UKk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NE1-9W-LtV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4821" y="2045"/>
+        </scene>
         <!--NewsVC-->
         <scene sceneID="dJE-7h-JII">
             <objects>

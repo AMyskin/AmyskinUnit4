@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 //import FirebaseDatabase
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController {
     
     lazy var service = ServiceNetwork()
     
