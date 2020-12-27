@@ -7,7 +7,7 @@ final class FriendData: Object, Codable {
     @objc dynamic var firstName: String = ""
     @objc dynamic var lastName: String = ""
     @objc dynamic var avatar: String = ""
-    @objc dynamic var online: Int = 0
+    //@objc dynamic var online: Int = 0
     let foto = List<Foto>()
     
     override class func primaryKey() -> String? {
@@ -20,7 +20,7 @@ final class FriendData: Object, Codable {
         case firstName = "first_name"
         case lastName = "last_name"
         case avatar = "photo_50"
-        case online
+     //   case online
 
     }
     convenience init(from decoder: Decoder) throws {
